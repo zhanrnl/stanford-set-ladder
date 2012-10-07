@@ -1,0 +1,93 @@
+body {
+    background-image: url('../img/txture.png');
+}
+
+h1, h2, h3 {
+    font-family: "PTSansBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.page-header {
+    padding-bottom: 0;
+}
+
+.help-block, .help-inline {
+    color: #999;
+}
+
+.help-block {
+    margin-top: 10px;
+}
+
+.dropShadow {
+    -moz-box-shadow: 0 5px 10px black;
+    -webkit-box-shadow: 0 5px 10px black;
+    box-shadow: 0 5px 10px black;
+}
+
+.largeCorners {
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.smallCorners {
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.whiteText {
+    color: white;
+}
+
+.alignCenter {
+    text-align: center;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+/* Login page */
+
+div.jumboLogo {
+    margin: 40px auto 30px auto;
+    background-image: url('../img/threereddiamondjumbotron.png');
+    width: 384px;
+    height: 240px;
+}
+
+h1#JumboHeader {
+    font-size: 40pt;
+    line-height: 56pt;
+}
+
+#LoginControls .form-horizontal .control-label {
+    width: 145px;
+}
+
+#LoginControls .form-horizontal .controls {
+    margin-left: 165px;
+}
+
+/* Page template */
+
+div.header {
+    margin-top: 10px;
+}
+
+div.headerLogo {
+    background-image: url('../img/threereddiamondsmall.png');
+    width: 128px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+h1.logoText {
+    font-size: 34pt;
+    line-height: 1.55;
+}
+
+.userBox {
+    padding-top: 14px;
+}

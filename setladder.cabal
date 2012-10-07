@@ -1,0 +1,42 @@
+Name:                setladder
+Version:             0.1
+Synopsis:            Stanford Set Ladder
+Description:         Stanford Set Ladder
+License:             AllRightsReserved
+Author:              Lennart Jansson
+Maintainer:          lennartj@stanford.edu
+Stability:           Experimental
+Category:            Web
+Build-type:          Simple
+Cabal-version:       >=1.2
+
+Executable setladder
+  hs-source-dirs: src
+  main-is: Main.hs
+
+  Build-depends:
+    base				>= 4     && < 5,
+    bytestring				>= 0.9.1 && < 0.10,
+    MonadCatchIO-transformers		>= 0.2.1 && < 0.4,
+    mtl					>= 2     && < 3,
+    snap-core				>= 0.9   && < 0.10,
+    snap-server				>= 0.9   && < 0.10,
+    blaze-builder,
+    blaze-html				>= 0.4.3.1,
+    blaze-markup			>= 0.5.1.0,
+    text,
+    data-lens				>= 2.10.2,
+    data-lens-template,
+    snap				>= 0.9 && < 0.10,
+    snaplet-mongodb-minimalistic	>= 0.0.6.5,
+    mongoDB				>= 1.3.0,
+    random				>= 1.0.1.1,
+    cryptohash				>= 0.7.5,
+    aeson				>= 0.6.0.2,
+    email-validate 			>= 0.2.8
+
+  if impl(ghc >= 6.12.0)
+    ghc-options: -threaded -Wall -fwarn-tabs -funbox-strict-fields -O2
+                 -fno-warn-unused-do-bind
+  else
+    ghc-options: -threaded -Wall -fwarn-tabs -funbox-strict-fields -O2

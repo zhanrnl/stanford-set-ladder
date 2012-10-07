@@ -1,0 +1,659 @@
+[04/Sep/2012:18:15:04 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:21:09 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:21:09 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:21:42 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:24:44 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:24:44 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:25:23 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:30:35 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:30:35 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:34:12 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:34:32 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:34:32 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:34:39 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:36:43 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:36:43 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:36:48 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:40:54 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:40:54 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:41:55 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:41:57 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:41:57 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:42:05 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:18:57:55 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:18:57:55 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:18:58:04 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:19:02:13 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:19:02:13 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:19:03:03 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:19:03:27 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:19:03:27 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:19:03:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:21:08:09 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:21:08:09 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:22:48:35 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:22:50:03 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:22:50:03 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:22:50:33 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:22:58:41 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:22:58:41 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:22:59:09 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:22:59:43 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:22:59:43 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:22:59:53 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:23:04:21 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:23:04:21 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:23:04:30 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:23:06:34 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:23:06:34 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:23:06:51 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:23:10:03 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:23:10:03 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:23:10:10 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[04/Sep/2012:23:13:22 -0700] Server.httpServe: SHUTDOWN
+[04/Sep/2012:23:13:22 -0700] Server.httpServe: BACKEND STOPPED
+[04/Sep/2012:23:13:29 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:09:11:16 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:09:11:16 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:09:12:41 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:09:14:07 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:09:14:07 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:09:14:16 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:09:14:50 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:09:14:50 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:09:15:30 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:10:15:46 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:10:15:46 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:10:16:21 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:10:27:55 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:10:27:55 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:10:33:08 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:10:36:35 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:10:36:35 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:10:36:42 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:10:37:35 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:10:37:35 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:10:37:43 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:12:48:05 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:12:48:05 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:12:48:14 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:12:49:29 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:12:49:29 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:12:49:39 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:13:12:45 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:13:12:45 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:13:12:52 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:13:23:07 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:13:23:07 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:13:23:15 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:13:35:01 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:13:35:01 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:13:35:51 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:14:03:37 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:14:03:37 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:14:03:43 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:14:04:01 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:14:04:01 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:14:04:05 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:15:12:39 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:15:12:39 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:15:12:48 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:15:18:29 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:15:18:29 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:15:21:04 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:15:32:59 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:15:32:59 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:15:33:09 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:15:33:40 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:15:33:40 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:15:33:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:15:33:41 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:15:33:41 -0700] Server.httpServe: BACKEND STOPPED
+[05/Sep/2012:15:33:43 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Sep/2012:15:57:36 -0700] Server.httpServe: SHUTDOWN
+[05/Sep/2012:15:57:36 -0700] Server.httpServe: BACKEND STOPPED
+[06/Sep/2012:15:51:41 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[06/Sep/2012:16:06:46 -0700] Server.httpServe: SHUTDOWN
+[06/Sep/2012:16:06:46 -0700] Server.httpServe: BACKEND STOPPED
+[06/Sep/2012:16:08:29 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[06/Sep/2012:23:25:00 -0700] Server.httpServe: SHUTDOWN
+[06/Sep/2012:23:25:00 -0700] Server.httpServe: BACKEND STOPPED
+[11/Sep/2012:11:00:45 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[11/Sep/2012:11:01:48 -0700] Server.httpServe: SHUTDOWN
+[11/Sep/2012:11:01:48 -0700] Server.httpServe: BACKEND STOPPED
+[11/Sep/2012:15:57:20 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[11/Sep/2012:16:50:09 -0700] Server.httpServe: SHUTDOWN
+[11/Sep/2012:16:50:09 -0700] Server.httpServe: BACKEND STOPPED
+[11/Sep/2012:16:50:37 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[11/Sep/2012:16:50:48 -0700] Server.httpServe: SHUTDOWN
+[11/Sep/2012:16:50:48 -0700] Server.httpServe: BACKEND STOPPED
+[11/Sep/2012:16:51:02 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[11/Sep/2012:16:54:39 -0700] Server.httpServe: SHUTDOWN
+[11/Sep/2012:16:54:39 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:10:07:29 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:10:09:22 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:10:09:22 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:10:09:32 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:10:26:15 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:10:26:15 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:12:36:25 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:12:43:30 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:12:43:30 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:12:45:13 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:15:25:43 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:15:25:43 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:02:23 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:16:02:24 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:16:02:24 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:02:35 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:16:03:36 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:16:03:36 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:04:14 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:16:06:56 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:16:06:56 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:06:59 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:16:07:01 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:16:07:01 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:07:10 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:16:09:50 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:16:09:50 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:10:02 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:16:11:36 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:16:11:36 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:11:47 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:16:22:40 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:16:22:40 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:16:23:05 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:21:53:31 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:21:53:31 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:21:55:54 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:22:12:51 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:22:12:51 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:22:13:02 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[12/Sep/2012:22:13:44 -0700] Server.httpServe: SHUTDOWN
+[12/Sep/2012:22:13:44 -0700] Server.httpServe: BACKEND STOPPED
+[12/Sep/2012:22:14:59 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[13/Sep/2012:08:56:11 -0700] Server.httpServe: SHUTDOWN
+[13/Sep/2012:08:56:11 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:02:54 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:11:54 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:11:54 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:12:03 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:18:54 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:18:54 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:19:00 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:19:17 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:19:17 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:19:24 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:28:14 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:28:14 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:28:22 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:34:25 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:34:25 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:34:32 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:40:28 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:40:28 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:40:35 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:42:31 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:42:31 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:42:38 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:45:49 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:45:49 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:45:56 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:48:13 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:48:13 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:48:21 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:49:33 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:49:33 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:49:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:51:43 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:51:43 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:51:50 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:52:04 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:52:04 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:52:12 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:09:52:49 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:09:52:49 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:09:52:57 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:10:22:41 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:10:22:41 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:10:22:48 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:10:23:57 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:10:23:57 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:10:24:03 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:10:25:43 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:10:25:43 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:10:25:50 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:10:27:39 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:10:27:39 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:10:27:43 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:10:28:33 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:10:28:33 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:10:28:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:14:50:14 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:14:50:14 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:14:50:22 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:14:54:11 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:14:54:11 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:14:54:14 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:14:54:35 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:14:54:35 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:14:54:42 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:14:59:45 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:14:59:45 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:14:59:53 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:18:56:45 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:18:56:45 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:20:18:03 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:20:18:05 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:20:18:05 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:20:18:35 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:20:18:37 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:20:18:37 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:20:18:57 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[14/Sep/2012:20:19:06 -0700] Server.httpServe: SHUTDOWN
+[14/Sep/2012:20:19:06 -0700] Server.httpServe: BACKEND STOPPED
+[14/Sep/2012:20:25:23 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:09:33:13 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:09:33:13 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:15:52:18 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:15:53:54 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:15:53:54 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:15:54:05 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:15:56:12 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:15:56:12 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:15:56:21 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:03:54 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:03:54 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:03:57 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:07:05 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:07:05 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:07:14 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:08:32 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:08:32 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:08:34 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:08:43 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:08:43 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:08:52 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:19:45 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:19:45 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:19:47 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:21:43 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:21:43 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:21:47 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:22:19 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:22:19 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:22:22 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:25:24 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:25:24 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:25:27 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:27:06 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:27:06 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:28:22 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:31:41 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:31:41 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:31:51 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:32:24 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:32:24 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:32:33 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:33:05 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:33:05 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:33:09 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:33:11 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:33:11 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:33:20 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:34:26 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:34:26 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:34:34 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:38:03 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:38:03 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:38:11 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:39:10 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:39:10 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:39:19 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:42:54 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:42:54 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:43:02 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:44:39 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:44:39 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:44:48 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[15/Sep/2012:16:45:17 -0700] Server.httpServe: SHUTDOWN
+[15/Sep/2012:16:45:17 -0700] Server.httpServe: BACKEND STOPPED
+[15/Sep/2012:16:45:26 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:07:17:46 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:07:17:46 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:07:17:55 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:07:44:35 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:07:44:35 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:07:44:39 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:35:33 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:35:33 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:35:37 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:44:51 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:44:51 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:44:56 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:44:57 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:44:57 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:46:25 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:50:31 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:50:31 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:50:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:56:47 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:56:47 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:56:49 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:57:03 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:57:03 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:57:11 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:59:09 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:59:09 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:59:09 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:59:10 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:59:10 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:59:13 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:08:59:28 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:08:59:28 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:08:59:36 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:00:50 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:00:50 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:00:57 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:02:42 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:02:42 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:02:50 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:03:12 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:03:12 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:03:51 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:08:29 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:08:29 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:08:37 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:12:19 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:12:19 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:12:27 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:13:59 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:13:59 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:14:07 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:16:04 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:16:04 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:16:07 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:16:18 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:16:18 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:16:26 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:18:19 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:18:19 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:18:27 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:23:14 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:23:14 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:23:23 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:24:10 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:24:10 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:24:19 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:24:52 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:24:52 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:25:00 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:42:28 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:42:28 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:42:30 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:42:49 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:42:49 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:42:52 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:43:13 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:43:13 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:43:21 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:44:32 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:44:32 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:44:41 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:47:39 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:47:39 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:47:48 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:09:48:17 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:09:48:17 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:09:48:25 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:15:46:55 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:15:46:55 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:15:47:02 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:15:47:06 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:15:47:06 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:15:47:28 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:15:48:06 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:15:48:06 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:15:48:15 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:15:48:23 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:15:48:23 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:15:48:32 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[16/Sep/2012:15:49:05 -0700] Server.httpServe: SHUTDOWN
+[16/Sep/2012:15:49:05 -0700] Server.httpServe: BACKEND STOPPED
+[16/Sep/2012:15:49:12 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:08:33:13 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:08:33:13 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:08:33:15 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:08:33:39 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:08:33:39 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:08:33:41 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:08:34:01 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:08:34:01 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:08:34:10 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:08:35:31 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:08:35:31 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:08:35:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:08:37:44 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:08:37:44 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:08:37:54 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:08:40:11 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:08:40:11 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:08:40:20 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:12:03:35 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:12:03:35 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:12:03:45 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[17/Sep/2012:12:18:30 -0700] Server.httpServe: SHUTDOWN
+[17/Sep/2012:12:18:30 -0700] Server.httpServe: BACKEND STOPPED
+[17/Sep/2012:12:18:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[18/Sep/2012:07:58:11 -0700] Server.httpServe: SHUTDOWN
+[18/Sep/2012:07:58:11 -0700] Server.httpServe: BACKEND STOPPED
+[18/Sep/2012:07:58:25 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:16:59:31 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:16:59:31 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:16:59:51 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:09:38 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:09:38 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:09:47 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:10:42 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:10:42 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:10:51 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:11:38 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:11:38 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:11:48 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:16:15 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:16:15 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:16:19 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:17:21 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:17:21 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:17:23 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:21:12 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:21:12 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:21:15 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:23:50 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:23:50 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:23:53 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:24:24 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:24:24 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:24:27 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[19/Sep/2012:17:25:32 -0700] Server.httpServe: SHUTDOWN
+[19/Sep/2012:17:25:32 -0700] Server.httpServe: BACKEND STOPPED
+[19/Sep/2012:17:25:42 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:08:07 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:08:32 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:08:32 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:08:38 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:10:55 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:10:55 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:11:00 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:11:44 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:11:44 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:11:57 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:19:52 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:19:52 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:19:56 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:20:12 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:20:12 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:20:22 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:24:13 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:24:13 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:24:22 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:30:41 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:30:41 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:30:46 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:43:34 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:43:34 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:43:39 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:47:33 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:47:33 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:47:37 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:16:51:19 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:16:51:19 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:16:51:31 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:17:01:07 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:17:01:07 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:17:01:19 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:17:04:57 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:17:04:57 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:17:05:10 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:17:11:36 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:17:11:36 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:17:11:47 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:17:12:23 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:17:12:23 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:17:12:34 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:17:35:23 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:17:35:23 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:17:35:36 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:17:36:42 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:17:36:42 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:17:36:54 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[22/Sep/2012:17:46:59 -0700] Server.httpServe: SHUTDOWN
+[22/Sep/2012:17:46:59 -0700] Server.httpServe: BACKEND STOPPED
+[22/Sep/2012:17:47:11 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[23/Sep/2012:08:52:23 -0700] Server.httpServe: SHUTDOWN
+[23/Sep/2012:08:52:23 -0700] Server.httpServe: BACKEND STOPPED
+[23/Sep/2012:08:52:33 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[23/Sep/2012:09:50:23 -0700] ["221.7.193.68"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:16:13:53 -0700] ["119.165.30.104"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:16:46:55 -0700] ["119.165.30.104"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:16:49:28 -0700] ["119.165.30.104"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:16:51:06 -0700] ["119.165.30.104"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:20:13:16 -0700] ["218.6.135.165"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:22:19:40 -0700] ["58.17.52.14"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:22:19:41 -0700] ["58.17.52.14"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:22:19:42 -0700] ["58.17.52.14"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[23/Sep/2012:22:19:45 -0700] ["58.17.52.14"]: an exception escaped to toplevel:
+recv: resource vanished (Connection reset by peer)
+[05/Oct/2012:00:50:43 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:00:51:08 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:00:51:08 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:00:55:21 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:00:56:31 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:00:56:31 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:00:56:31 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:00:56:34 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:00:56:34 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:00:56:59 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:01:03:55 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:01:03:55 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:01:04:07 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:01:04:44 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:01:04:44 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:01:04:45 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:01:08:56 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:01:08:56 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:01:08:56 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:01:10:26 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:01:10:26 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:01:10:38 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:10:10:34 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:10:10:34 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:10:10:40 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:10:10:45 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:10:10:45 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:10:14:24 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:10:15:25 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:10:15:25 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:10:15:38 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:13:12:26 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:13:12:26 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:13:30:56 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:13:32:27 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:13:32:27 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:13:32:33 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:13:32:58 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:13:32:58 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:15:44:03 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:15:50:59 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:15:50:59 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:15:51:19 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:15:55:53 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:15:55:53 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:15:56:07 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:16:48:39 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:16:48:39 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:16:48:43 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:16:50:12 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:16:50:12 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:16:50:16 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:16:50:19 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:16:50:19 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:16:51:04 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:16:53:19 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:16:53:19 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:16:54:13 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:16:58:29 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:16:58:29 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:16:59:41 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:02:01 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:02:01 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:09:52 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:12:28 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:12:28 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:12:41 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:14:13 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:14:13 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:14:23 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:20:21 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:20:21 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:20:48 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:23:34 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:23:34 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:23:43 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:38:36 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:38:36 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:38:46 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:43:19 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:43:19 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:44:01 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:17:46:13 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:17:46:13 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:17:48:31 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:18:01:17 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:18:01:17 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:18:10:36 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:18:13:16 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:18:13:16 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:18:13:21 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:18:13:42 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:18:13:42 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:18:13:51 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:18:44:49 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:18:44:49 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:18:44:59 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:18:45:15 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:18:45:15 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:18:45:24 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
+[05/Oct/2012:18:45:33 -0700] Server.httpServe: SHUTDOWN
+[05/Oct/2012:18:45:33 -0700] Server.httpServe: BACKEND STOPPED
+[05/Oct/2012:18:46:00 -0700] Server.httpServe: START, binding to [http://0.0.0.0:8000/]
