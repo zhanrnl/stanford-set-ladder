@@ -7,10 +7,20 @@ import qualified Prelude as P
 import Data.Text (Text)
 --import qualified Data.Text as T
 import Text.Blaze.Html5 hiding (map)
-import Text.Blaze.Internal (Attributable)
+import Text.Blaze.Internal (Attributable, textValue)
 import qualified Text.Blaze.Html5.Attributes as A
 --import Data.Monoid ((<>))
 import Control.Monad
+
+import Types
+
+navbarEntries :: [NavbarEntry]
+navbarEntries = [
+  NavbarEntry Home "Home" "/",
+  NavbarEntry Login "Login" "/login",
+  NavbarEntry Profile "Your profile" "/profile",
+  NavbarEntry Friends "Friends" "/friends"
+  ]
 
 maybeWhen :: (Monad m) => Maybe a -> (a -> m ()) -> m ()
 maybeWhen maybeA f =
@@ -33,8 +43,8 @@ tag !+ val = tag ! A.type_ val
 (!=) :: Attributable h => h -> AttributeValue -> h
 tag != val = tag ! customAttribute "data-bind" val
 
-baseTemplate :: Text -> Maybe Html -> Html -> Html
-baseTemplate titleText maybeHeadHtml contentHtml = docTypeHtml $ do
+baseTemplate :: PageName -> Text -> Maybe Html -> Html -> Html
+baseTemplate _ titleText maybeHeadHtml contentHtml = docTypeHtml $ do
   head $ do
     title $ toHtml titleText
     stylesheetLink "/static/css/bootstrap.min.css"
@@ -48,12 +58,13 @@ baseTemplate titleText maybeHeadHtml contentHtml = docTypeHtml $ do
     maybeWhen maybeHeadHtml (>> return ())
   body $ contentHtml
 
-pageTemplate :: Text -> Maybe Html -> Text -> Html -> Html
-pageTemplate titleText maybeHeadHtml username contentHtml =
-  baseTemplate titleText maybeHeadHtml $ div ! A.class_ "container" $ do
+pageTemplate :: PageName -> Text -> Maybe Html -> Text -> Html -> Html
+pageTemplate page titleText maybeHeadHtml username contentHtml =
+  baseTemplate page titleText maybeHeadHtml $ div ! A.class_ "container" $ do
     div !. "row header" $ do
       div !. "span9" $ do
-        div !. "headerLogo smallCorners dropShadow pull-left" $ empty
+        a ! A.href "/" $ 
+          div !. "headerLogo smallCorners dropShadow pull-left" $ empty
         h1 !. "logoText" $ "the Stanford Set Ladder"
       when (username /= "") $ do
         div !. "span3 alignRight userBox" $ do
@@ -61,16 +72,34 @@ pageTemplate titleText maybeHeadHtml username contentHtml =
             "Logged in as: "
             strong $ toHtml username
           div !. "btn-group" $ do
-            a !. "btn btn-small" $ "Edit profile"
             a !. "btn btn-small" ! A.href "/logout" $ "Log out"
-    div !. "row" $
+    div !. "row" $ do
+      --div !. "span4" $ "Navigation bar here"
       div !. "span12" $ contentHtml
 
+navBar :: PageName -> Html
+navBar activePageName = do
+  ul !. "nav nav-pills nav-stacked" $ do
+    mapM_ navEntryHtml navbarEntries
+  where navEntryHtml navbarEntry = do
+          maybeActiveLi navbarEntry $ do
+            a ! A.href (textValue $ linkAddress navbarEntry) $
+              toHtml $ displayText navbarEntry
+        maybeActiveLi navbarEntry =
+          if pageName navbarEntry == activePageName
+          then (li !. "active")
+          else li
+
+pageTemplateNav :: PageName -> Text -> Maybe Html -> Text -> Html -> Html
+pageTemplateNav page titleText maybeHeadHtml username contentHtml =
+  pageTemplateNav page titleText maybeHeadHtml username $ do
+    div !. "row" $ do
+      --div !. "span3" $ navBar page
+      div !. "span9" $ contentHtml
+
 index :: Text -> Html
-index username = pageTemplate "Set Ladder" Nothing username $ do
-  div !. "row" $
-    div !. "span12" $ 
-    p "Hello!"
+index username = pageTemplateNav Home "Set Ladder" Nothing username $ do
+  "Hello!"
 
 closeButton :: Html
 closeButton =
@@ -81,7 +110,7 @@ login :: Html
 login = loginMessage ""
 
 loginMessage :: Text -> Html
-loginMessage m = baseTemplate "Login to Set Ladder" Nothing $ div !. "container" $ do
+loginMessage m = baseTemplate Login "Login to Set Ladder" Nothing $ div !. "container" $ do
   div !. "row" $ div !. "span12" $ do
     div !. "jumboLogo largeCorners dropShadow" $ empty
     h1 !# "JumboHeader" !. "alignCenter" $ "the Stanford Set Ladder"
@@ -117,7 +146,7 @@ register :: Html
 register = registerMessage ""
 
 registerMessage :: Text -> Html
-registerMessage m = pageTemplate "Register for Set Ladder" scripts "" $ do
+registerMessage m = pageTemplate Register "Register for Set Ladder" scripts "" $ do
   div !. "row" $ do
     div !. "span12" $ do
       div !. "page-header" $ do
