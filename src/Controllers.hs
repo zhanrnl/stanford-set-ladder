@@ -4,14 +4,15 @@ module Controllers where
 
 import Snap.Core
 import Control.Applicative
+import Data.Maybe
 import Snap.Snaplet
 import Snap.Snaplet.Session
 import Text.Blaze.Html5 (Html)
 import Text.Blaze.Html.Renderer.Utf8
 import Data.Text (Text)
-import qualified Data.Text as T
+--import qualified Data.Text as T
 import Data.ByteString.Char8 (ByteString)
-import qualified Data.ByteString.Char8 as B
+--import qualified Data.ByteString.Char8 as B
 import Data.Text.Encoding
 import Control.Monad.Trans
 import Data.Aeson ((.=))
@@ -54,6 +55,30 @@ index = requireAuth $ do
   username <- getSessJustUsername
   render $ V.index username
 
+friends :: AppHandler ()
+friends = requireAuth $ do
+  username <- getSessJustUsername
+  outFriends <- getOutFriendUsernames username
+  render $ V.friends username outFriends
+
+addFriend :: AppHandler ()
+addFriend = requireAuth $ do
+  username <- getSessJustUsername
+  currentFriends <- getOutFriendUsernames username
+  friendName <- getTextParam "friendName"
+  friendNameExists <- not <$> isUsernameAvailable friendName
+  if friendName == username
+    then writeLBS "cannotaddself"
+    else if friendName `elem` currentFriends
+         then writeLBS "alreadyfriend"
+         else if not friendNameExists
+              then writeLBS "usernamenotfound"
+              else do
+                success <- addFriendship username friendName
+                if success
+                  then writeLBS "success"
+                  else writeLBS "servererror"
+
 login :: AppHandler ()
 login = requireNotAuth $ do
   message <- getParam "message"
@@ -73,12 +98,14 @@ auth = do
       withSession sess $ with sess $ setInSession "username" username
       redirect "/"
 
+{-
 test :: AppHandler ()
 test = do
   user <- lookupUserByName "arun_bassoon"
   liftIO $ do
     print (prettyPrint . getUserPassHash <$> user)
     print (prettyPrint . getUserPassSalt <$> user)
+-}
 
 logout :: AppHandler ()
 logout = do
@@ -118,3 +145,17 @@ usernameAvailable = do
     Just username -> isUsernameAvailable $ decodeUtf8 username
   let jsonObj = AE.object ["usernameAvailable" .= available]
   writeLBS $ AE.encode jsonObj
+
+usernameSearch :: AppHandler ()
+usernameSearch = do
+  maybeUsername <- getParam "username"
+  matchingNames <- case maybeUsername of
+    Nothing -> return []
+    Just username -> getMatchingNames $ decodeUtf8 username
+  writeLBS $ AE.encode matchingNames
+
+getFriends :: AppHandler ()
+getFriends = do
+  username <- getSessJustUsername
+  friendNames <- getOutFriendUsernames username
+  writeLBS $ AE.encode friendNames

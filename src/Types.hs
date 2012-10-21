@@ -20,6 +20,9 @@ instance HasMongoDB App where
 
 type AppHandler = Handler App App
 
+data DBError = DBFail | ResultFail deriving (Eq, Show)
+type DBEither a = Either DBError a
+
 -- View types
 data PageName = Home | Login | Register | Profile | Friends | Other Text
               deriving (Show, Eq)

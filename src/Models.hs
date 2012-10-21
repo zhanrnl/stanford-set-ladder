@@ -16,6 +16,7 @@ import qualified Data.Text as T
 import Data.Text.Encoding
 import qualified Crypto.Hash.SHA1 as SHA1
 import Data.Monoid
+import Data.Maybe
 import System.Random
 import Data.List
 import Data.Char
@@ -34,9 +35,6 @@ data User = User {
   getUserRealName :: Text,
   getUserLocation :: Text
 } deriving (Eq, Show)
-
-data DBError = DBFail | ResultFail deriving (Eq, Show)
-type DBEither a = Either DBError a
 
 hashPass :: Text -> ByteString -> ByteString
 hashPass clear salt = SHA1.hash $ (encodeUtf8 clear) <> salt
@@ -113,6 +111,15 @@ isUsernameAvailable username = do
     Right _ -> return False     -- if nonnull result set, not available
     Left ResultFail -> return True
 
+getMatchingNames :: Text -> AppHandler [Text]
+getMatchingNames username = do
+  maybeResult <- maybeWithDB $ do
+    cursor <- M.find (M.select ["username" =: ["$regex" =: (T.unpack username), "$options" =: ("i"::String)]] "users"){M.project = ["username" =: (1::Int)]}
+    M.rest cursor
+  case maybeResult of
+    Nothing -> return []
+    Just names -> return $ map (T.pack . fromJust . (!? "username")) names
+
 arePasswordsGood :: Text -> Text -> Bool
 arePasswordsGood pass1 pass2 =
   (not $ T.null pass1) && (not $ T.null pass2) && (pass1 == pass2)
@@ -123,3 +130,21 @@ isUserDataValid username password1 password2 email = do
   let passwordsGood = arePasswordsGood password1 password2
       emailGood = Email.isValid $ T.unpack email
   return (usernameGood && passwordsGood && emailGood)
+
+
+-- FRIENDS
+
+getOutFriendUsernames :: Text -> AppHandler [Text]
+getOutFriendUsernames username = do
+  maybeResult <- maybeWithDB $ do
+    cursor <- M.find (M.select ["username" =: username] "friends"){M.project = ["friendswith" =: (1::Int)]}
+    M.rest cursor
+  case maybeResult of
+    Nothing -> return []
+    Just names -> return $ map (T.pack . fromJust . (!? "friendswith")) names
+
+addFriendship :: Text -> Text -> AppHandler Bool
+addFriendship username friendName = do
+  maybeResult <- maybeWithDB $ M.insert "friends" ["username" =: username, "friendswith" =: friendName]
+  return $ isJust maybeResult
+                 

@@ -5,7 +5,29 @@ body {
 h1, h2, h3 {
     font-family: "PTSansBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
-    line-height: 1;
+    /*line-height: 1;*/
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+a {
+    color: #cc0f0c;
+}
+
+a:hover {
+    color: #d16866;
+}
+
+.nav-pills > li > a:hover {
+    color: #bd0e0b;
+    background-color: #111;
+}
+
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover {
+    background-color: #7f0907;
 }
 
 .page-header {
@@ -24,6 +46,12 @@ h1, h2, h3 {
     -moz-box-shadow: 0 5px 10px black;
     -webkit-box-shadow: 0 5px 10px black;
     box-shadow: 0 5px 10px black;
+}
+
+.subtleDropShadow {
+    -moz-box-shadow: 0 3px 10px #111;
+    -webkit-box-shadow: 0 3px 10px #111;
+    box-shadow: 0 3px 10px #111;
 }
 
 .largeCorners {
@@ -90,4 +118,9 @@ h1.logoText {
 
 .userBox {
     padding-top: 14px;
+}
+
+/* other */
+button#AddFriendButton {
+    margin-left: 6px;
 }
