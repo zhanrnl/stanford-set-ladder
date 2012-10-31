@@ -24,18 +24,25 @@ appInit = makeSnaplet "setladder" "" Nothing $ do
   m <- nestSnaplet "mongo" mongo $ mongoDBInit 10 (host "127.0.0.1") "setladder"
   addRoutesFull [("$", C.index),
                  ("index$", C.index),
-                 ("friends$", C.friends),
                  ("login$", C.login),
                  ("login/:message", C.login),
                  ("auth$", method POST C.auth),
                  ("logout$", C.logout),
+                 
                  ("register$", C.register),
                  ("register/:message", C.register),
-                 ("doregister$", method POST C.doRegister),
-                 ("addfriend$", method POST C.addFriend),
-                 ("getfriends$", C.getFriends),
                  ("usernameavailable/:username$", C.usernameAvailable),
                  ("usernamesearch/:username$", C.usernameSearch),
+                 ("doregister$", method POST C.doRegister),
+                 
+                 ("profile", C.profile),
+                 ("profile/:username", C.profile),
+                 
+                 ("friends$", C.friends),
+                 ("getfriends$", C.getFriends),
+                 ("addfriend$", method POST C.addFriend),
+                 ("unfriend$", method POST C.unFriend),
+                 
                  ("static", serveDirectory "static")]
   return $ App s m
 

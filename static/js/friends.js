@@ -27,6 +27,7 @@ $(function() {
 	var self = this;
 	self.friendName = ko.observable("");
 	self.outFriends = ko.observableArray(outFriendsInit);
+	self.unfriendUsername = ko.observable("");
 	self.addFriend = function() {
 	    var friendName = self.friendName();
 	    $.post('/addfriend', {friendName: encodeURI(friendName)}, function(data) {
@@ -47,10 +48,37 @@ $(function() {
 	    });
 	    self.friendName('');
 	}
+	self.doUnfriend = function() {
+	    var friendName = self.unfriendUsername();
+	    $.post('/unfriend', {friendName: friendName}, function(data) {
+		if (data == "notafriend") {
+		    showErrorBox("Cannot unfriend " + friendName + ", not a friend already.");
+		} else if (data == "servererror") {
+		    showErrorBox("Server error.");
+		} else {
+		    showSuccessBox("Unfriended " + friendName + ".");
+		    $.get('/getfriends', function(data) {
+			self.outFriends(JSON.parse(data));
+		    });
+		}
+	    });
+	};
+	self.setUnfriendUsername = function(username) {
+	    return function() {
+		self.unfriendUsername(username);
+	    };
+	};
     };
     
     var viewmodel = new GetFriendsViewModel();
     ko.applyBindings(viewmodel);
+/*
+    var setUnfriendUsername = function(username) {
+	return function() {
+	    viewmodel.unfriendUsername(username);
+	};
+    };
+*/
 
     $("#FriendNameInput").autocomplete({
 	source: function(request, response) {
@@ -62,7 +90,7 @@ $(function() {
 	    });
 	},
 	select: function(event, ui) {
-	    console.log('hello');
+	    viewmodel.friendName(ui.item.value);
 	}
     });
 });

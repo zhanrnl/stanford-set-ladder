@@ -18,7 +18,9 @@ navbarEntries :: [NavbarEntry]
 navbarEntries = [
   NavbarEntry Home "Home" "/",
   NavbarEntry Profile "Your profile" "/profile",
-  NavbarEntry Friends "Friends" "/friends"
+  NavbarEntry Friends "Friends" "/friends",
+  NavbarHeader "Play SET!",
+  NavbarEntry ReportOffline "Report offline 1v1 game" "/reportoffline"
   ]
 
 maybeWhen :: (Monad m) => Maybe a -> (a -> m ()) -> m ()
@@ -80,12 +82,15 @@ pageTemplate titleText maybeHeadHtml username contentHtml =
 navHtml :: PageName -> Html
 navHtml page = do
   ul !. "nav nav-pills nav-stacked" $ do
-    mapM_ makeNavHtml navbarEntries
-  where makeNavHtml navEntry = do
+    forM_ navbarEntries $ \navEntry -> do
+      case navEntry of
+        NavbarHeader text -> do
+          li !. "nav-header" $ toHtml text
+        _ -> do
           activeIfMatch navEntry li $
             a ! A.href (textValue $ linkAddress navEntry) $
             toHtml $ displayText navEntry
-        activeIfMatch navEntry tag =
+  where activeIfMatch navEntry tag =
           if (pageName navEntry == page)
           then tag !. "active subtleDropShadow"
           else tag
@@ -98,14 +103,17 @@ pageTemplateNav page titleText maybeHeadHtml username contentHtml =
       div !. "span9" $ contentHtml
 
 index :: Text -> Html
-index username = pageTemplateNav Home "Set Ladder" Nothing username $ do
-  p "Hello!"
+index username = pageTemplateNav Home "Set Ladder: Home" Nothing username $ do
+  h1 "Welcome!"
+  p "The Stanford Set Ladder is a player ranking database and system for competitive SET (the card game). Currently you can play games in real life and report the results to the Set Ladder and your and your opponent's ratings will be updated."
+  h3 "Exciting features on the way"
+  p "Eventually, you will be able to play games online in realtime against opponents, with an automatic matchmaking system. You will also be able play the SET Daily Puzzle and play through a full deck solitaire style to compete for the fastest time."
 
 preEscapedText :: Text -> Html
 preEscapedText = preEscapedToHtml
 
-friends :: Text -> [Text] -> Html
-friends username outFriends = pageTemplateNav Friends "Set Ladder" scripts username $ do
+friends :: Text -> [Text] -> [Text] -> Html
+friends username outFriends inFriends = pageTemplateNav Friends "Set Ladder: Friends" scripts username $ do
   h1 "Friends"
   p "Adding friends makes it easier to keep track of their ratings and game records, and also allows them to report offline 1v1 games between the two of you. Simply type their usernames below to add them to your list of friends."
   form !. "form-inline" ! A.action "javascript:void(0)" $ do
@@ -117,27 +125,84 @@ friends username outFriends = pageTemplateNav Friends "Set Ladder" scripts usern
       "Add friend"
   div !# "ErrorContainer" $ empty
   h3 "Users you have added as a friend"
+  div !. "modal hide fade" !# "UnfriendModal" ! A.tabindex "-1" ! customAttribute "role" "dialog" $ do
+    div !. "modal-header" $ do
+      modalCloseButton
+      h3 "Unfriending"
+    div !. "modal-body" $ do
+      p $ do
+        "Do you really want to unfriend "
+        span != "text: unfriendUsername" $ empty
+        "?"
+    div !. "modal-footer" $ do
+      button !. "btn" ! customAttribute "data-dismiss" "modal" $ "Cancel"
+      button !. "btn btn-danger" != "click: doUnfriend" ! customAttribute "data-dismiss" "modal" $ "Unfriend"
   table !. "table table-condensed" != "visible: outFriends().length > 0" $ do
     thead $ do
-      tr $ do
-        th $ "Username"
+      tr $ th $ "Username"
     tbody $ do
       preEscapedText "<!-- ko foreach: outFriends -->"
       tr $ do
         td != "text: $data" $ empty
         td $ do
           a != "attr: {href: '/profile/' + $data}" $ "View profile"
+        td $ do
+          a ! A.href "#UnfriendModal"
+            != "click: $root.setUnfriendUsername($data)"
+            ! customAttribute "data-toggle" "modal" $ "Unfriend"
       preEscapedText "<!-- /ko -->"
   p != "visible: outFriends().length == 0" $ "No friends added yet."
+  h3 "Users who have added you as a friend"
+  if (null inFriends)
+    then do
+    p "No one has added you as a friend yet."
+    else do
+    p "Since these users have given you permission, you can report offline 1v1 games between you and anyone on this list to update your rankings."
+    table !. "table table-condensed" $ do
+      thead $ do
+        tr $ th $ "Username"
+      tbody $ do
+        forM_ inFriends $ \friendName -> do
+          tr $ do
+            td $ toHtml friendName
+            td $ do
+              a ! A.href (textValue $ "/profile/" <> friendName) $ "View profile"
   where scripts = Just $ do
           script $ toHtml $
             "var outFriendsInit = [" <>
             T.intercalate ", " (map (T.pack . show) outFriends) <> "];"
           script ! A.src "/static/js/friends.js" $ empty
 
+userProfileNoTemplate :: Text -> Text -> Text -> Html
+userProfileNoTemplate username realname location = do
+  h1 $ toHtml $ "User profile of " <> username
+  p $ do
+    strong "Real name: "
+    toHtmlNoneGiven realname
+  p $ do
+    strong "Location: "
+    toHtmlNoneGiven location
+
+userProfile :: Text -> Text -> Text -> Html
+userProfile username realname location = pageTemplateNav Other ("Set Ladder: Profile of " <> username) Nothing username $ userProfileNoTemplate username realname location
+
+userSelfProfile :: Text -> Text -> Text -> Html
+userSelfProfile username realname location = pageTemplateNav Profile "Set Ladder: Your profile" Nothing username $ userProfileNoTemplate username realname location
+
+toHtmlNoneGiven :: Text -> Html
+toHtmlNoneGiven t =
+  if t == ""
+  then span !. "muted" $ "(none)"
+  else toHtml t
+
 closeButton :: Html
 closeButton =
   button !. "close" !+ "button" ! customAttribute "data-dismiss" "alert" $
+  preEscapedText "&times;"
+  
+modalCloseButton :: Html
+modalCloseButton =
+  button !. "close" !+ "button" ! customAttribute "data-dismiss" "modal" $
   preEscapedText "&times;"
 
 login :: Html
@@ -243,3 +308,10 @@ registerMessage m = pageTemplate "Register for Set Ladder" scripts "" $ do
       p !. "lead" $ "Registration is free and easy and we probably won't misuse your personal information!"
   where scripts = Just $ do
           script ! A.src "/static/js/register.js" $ empty
+
+
+notFound :: Html
+notFound = baseTemplate "404" Nothing $ div !. "container" $ do
+  div !. "row" $ div !. "span12" $ do
+    h1 !. "alignCenter" ! A.style "line-height:1;margin-top:100px;font-size:100px" $ "OH NOES :("
+    h1 !. "alignCenter" $ "404: page not found"

@@ -143,8 +143,23 @@ getOutFriendUsernames username = do
     Nothing -> return []
     Just names -> return $ map (T.pack . fromJust . (!? "friendswith")) names
 
+getInFriendUsernames :: Text -> AppHandler [Text]
+getInFriendUsernames username = do
+  maybeResult <- maybeWithDB $ do
+    cursor <- M.find (M.select ["friendswith" =: username] "friends"){M.project = ["username" =: (1::Int)]}
+    M.rest cursor
+  case maybeResult of
+    Nothing -> return []
+    Just names -> return $ map (T.pack . fromJust . (!? "username")) names
+
 addFriendship :: Text -> Text -> AppHandler Bool
 addFriendship username friendName = do
   maybeResult <- maybeWithDB $ M.insert "friends" ["username" =: username, "friendswith" =: friendName]
   return $ isJust maybeResult
-                 
+
+doUnfriend :: Text -> Text -> AppHandler Bool
+doUnfriend username friendName = do
+  maybeResult <- maybeWithDB $ 
+    M.delete $ M.select ["username" =: username, "friendswith" =: friendName] "friends"
+  return $ isJust maybeResult
+

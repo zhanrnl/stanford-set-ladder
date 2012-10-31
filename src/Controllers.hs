@@ -59,7 +59,8 @@ friends :: AppHandler ()
 friends = requireAuth $ do
   username <- getSessJustUsername
   outFriends <- getOutFriendUsernames username
-  render $ V.friends username outFriends
+  inFriends <- getInFriendUsernames username
+  render $ V.friends username outFriends inFriends
 
 addFriend :: AppHandler ()
 addFriend = requireAuth $ do
@@ -79,6 +80,52 @@ addFriend = requireAuth $ do
                   then writeLBS "success"
                   else writeLBS "servererror"
 
+unFriend :: AppHandler ()
+unFriend = requireAuth $ do
+  username <- getSessJustUsername
+  currentFriends <- getOutFriendUsernames username
+  friendName <- getTextParam "friendName"
+  if not (friendName `elem` currentFriends)
+    then writeLBS "notafriend"
+    else do
+      success <- doUnfriend username friendName
+      if success
+        then writeLBS "success"
+        else writeLBS "servererror"
+
+getFriends :: AppHandler ()
+getFriends = do
+  username <- getSessJustUsername
+  friendNames <- getOutFriendUsernames username
+  writeLBS $ AE.encode friendNames
+
+profile :: AppHandler ()
+profile = requireAuth $ do
+  usernameParam <- getTextParam "username"
+  if usernameParam == ""
+    then profileSelf
+    else profileUser usernameParam
+
+{- Add different implementation here, needs to render a different view to
+   have edit controls on page -}
+profileSelf :: AppHandler ()
+profileSelf = getSessJustUsername >>= profileUser
+
+profileUser :: Text -> AppHandler ()
+profileUser username = do
+  self <- getSessJustUsername
+  maybeUser <- lookupUserByName username
+  case maybeUser of
+    Left DBFail -> redirect "/servererror"
+    Left ResultFail -> notFound
+    Right user -> do
+      let userProfileView =
+            if self == username
+            then V.userSelfProfile
+            else V.userProfile
+      render $ userProfileView (getUsername user) (getUserRealName user)
+        (getUserLocation user)
+
 login :: AppHandler ()
 login = requireNotAuth $ do
   message <- getParam "message"
@@ -97,15 +144,6 @@ auth = do
     Right _ -> do
       withSession sess $ with sess $ setInSession "username" username
       redirect "/"
-
-{-
-test :: AppHandler ()
-test = do
-  user <- lookupUserByName "arun_bassoon"
-  liftIO $ do
-    print (prettyPrint . getUserPassHash <$> user)
-    print (prettyPrint . getUserPassSalt <$> user)
--}
 
 logout :: AppHandler ()
 logout = do
@@ -154,8 +192,8 @@ usernameSearch = do
     Just username -> getMatchingNames $ decodeUtf8 username
   writeLBS $ AE.encode matchingNames
 
-getFriends :: AppHandler ()
-getFriends = do
-  username <- getSessJustUsername
-  friendNames <- getOutFriendUsernames username
-  writeLBS $ AE.encode friendNames
+
+notFound :: AppHandler ()
+notFound = do
+  getResponse >>= (putResponse . setResponseCode 404)
+  render V.notFound

@@ -23,11 +23,17 @@ type AppHandler = Handler App App
 data DBError = DBFail | ResultFail deriving (Eq, Show)
 type DBEither a = Either DBError a
 
--- View types
-data PageName = Home | Login | Register | Profile | Friends | Other Text
+-- For ratings
+data GameType = Offline | Other
               deriving (Show, Eq)
-data NavbarEntry = NavbarEntry {
-  pageName :: PageName,
-  displayText :: Text,
-  linkAddress :: Text
-  } deriving (Show, Eq)
+
+-- View types
+data PageName = Home | Profile | Friends
+              | ReportOffline
+              | Other
+              deriving (Show, Eq)
+data NavbarEntry = NavbarEntry {pageName :: PageName,
+                                displayText :: Text,
+                                linkAddress :: Text}
+                 | NavbarHeader Text
+                 deriving (Show, Eq)
