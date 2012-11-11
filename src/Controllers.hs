@@ -10,7 +10,7 @@ import Snap.Snaplet.Session
 import Text.Blaze.Html5 (Html)
 import Text.Blaze.Html.Renderer.Utf8
 import Data.Text (Text)
---import qualified Data.Text as T
+import qualified Data.Text as T
 import Data.ByteString.Char8 (ByteString)
 --import qualified Data.ByteString.Char8 as B
 import Data.Text.Encoding
@@ -54,77 +54,6 @@ index :: AppHandler ()
 index = requireAuth $ do
   username <- getSessJustUsername
   render $ V.index username
-
-friends :: AppHandler ()
-friends = requireAuth $ do
-  username <- getSessJustUsername
-  outFriends <- getOutFriendUsernames username
-  inFriends <- getInFriendUsernames username
-  render $ V.friends username outFriends inFriends
-
-addFriend :: AppHandler ()
-addFriend = requireAuth $ do
-  username <- getSessJustUsername
-  currentFriends <- getOutFriendUsernames username
-  friendName <- getTextParam "friendName"
-  friendNameExists <- not <$> isUsernameAvailable friendName
-  if friendName == username
-    then writeLBS "cannotaddself"
-    else if friendName `elem` currentFriends
-         then writeLBS "alreadyfriend"
-         else if not friendNameExists
-              then writeLBS "usernamenotfound"
-              else do
-                success <- addFriendship username friendName
-                if success
-                  then writeLBS "success"
-                  else writeLBS "servererror"
-
-unFriend :: AppHandler ()
-unFriend = requireAuth $ do
-  username <- getSessJustUsername
-  currentFriends <- getOutFriendUsernames username
-  friendName <- getTextParam "friendName"
-  if not (friendName `elem` currentFriends)
-    then writeLBS "notafriend"
-    else do
-      success <- doUnfriend username friendName
-      if success
-        then writeLBS "success"
-        else writeLBS "servererror"
-
-getFriends :: AppHandler ()
-getFriends = do
-  username <- getSessJustUsername
-  friendNames <- getOutFriendUsernames username
-  writeLBS $ AE.encode friendNames
-
-profile :: AppHandler ()
-profile = requireAuth $ do
-  usernameParam <- getTextParam "username"
-  if usernameParam == ""
-    then profileSelf
-    else profileUser usernameParam
-
-{- Add different implementation here, needs to render a different view to
-   have edit controls on page -}
-profileSelf :: AppHandler ()
-profileSelf = getSessJustUsername >>= profileUser
-
-profileUser :: Text -> AppHandler ()
-profileUser username = do
-  self <- getSessJustUsername
-  maybeUser <- lookupUserByName username
-  case maybeUser of
-    Left DBFail -> redirect "/servererror"
-    Left ResultFail -> notFound
-    Right user -> do
-      let userProfileView =
-            if self == username
-            then V.userSelfProfile
-            else V.userProfile
-      render $ userProfileView (getUsername user) (getUserRealName user)
-        (getUserLocation user)
 
 login :: AppHandler ()
 login = requireNotAuth $ do
@@ -191,6 +120,134 @@ usernameSearch = do
     Nothing -> return []
     Just username -> getMatchingNames $ decodeUtf8 username
   writeLBS $ AE.encode matchingNames
+
+infriendSearch :: AppHandler ()
+infriendSearch = requireAuth $ do
+  username <- getSessJustUsername
+  query <- getTextParam "query"
+  inFriends <- getMatchingInfriends username query
+  writeLBS $ AE.encode inFriends
+
+friends :: AppHandler ()
+friends = requireAuth $ do
+  username <- getSessJustUsername
+  outFriends <- getOutFriendUsernames username
+  inFriends <- getInFriendUsernames username
+  render $ V.friends username outFriends inFriends
+
+addFriend :: AppHandler ()
+addFriend = requireAuth $ do
+  username <- getSessJustUsername
+  currentFriends <- getOutFriendUsernames username
+  friendName <- getTextParam "friendName"
+  friendNameExists <- not <$> isUsernameAvailable friendName
+  if friendName == username
+    then writeLBS "cannotaddself"
+    else if friendName `elem` currentFriends
+         then writeLBS "alreadyfriend"
+         else if not friendNameExists
+              then writeLBS "usernamenotfound"
+              else do
+                success <- addFriendship username friendName
+                if success
+                  then writeLBS "success"
+                  else writeLBS "servererror"
+
+unFriend :: AppHandler ()
+unFriend = requireAuth $ do
+  username <- getSessJustUsername
+  currentFriends <- getOutFriendUsernames username
+  friendName <- getTextParam "friendName"
+  if not (friendName `elem` currentFriends)
+    then writeLBS "notafriend"
+    else do
+      success <- doUnfriend username friendName
+      if success
+        then writeLBS "success"
+        else writeLBS "servererror"
+
+getFriends :: AppHandler ()
+getFriends = do
+  username <- getSessJustUsername
+  friendNames <- getOutFriendUsernames username
+  writeLBS $ AE.encode friendNames
+
+profile :: AppHandler ()
+profile = requireAuth $ do
+  usernameParam <- getTextParam "username"
+  message <- getTextParam "message"
+  if usernameParam == ""
+    then profileSelf message
+    else profileUser "" usernameParam
+
+-- TODO: Add different implementation here, needs to render a different view to
+-- have edit controls on page
+profileSelf :: Text -> AppHandler ()
+profileSelf message = getSessJustUsername >>= profileUser message
+
+profileUser :: Text -> Text -> AppHandler ()
+profileUser message username = do
+  self <- getSessJustUsername
+  maybeUser <- lookupUserByName username
+  ratingE <- get1v1Rating False username
+  recentGames <- getRecentGames username
+  case maybeUser of
+    Left DBFail -> redirect "/servererror"
+    Left ResultFail -> notFound
+    Right user -> do
+      let userProfileView =
+            if self == username
+            then V.userSelfProfile
+            else V.userProfile
+          rating = case ratingE of
+            Left _ -> Nothing
+            Right r -> Just r 
+      render $ userProfileView (getUsername user) (getUserRealName user)
+        (getUserLocation user) rating recentGames message
+
+reportGame :: AppHandler ()
+reportGame = requireAuth $ do
+  username <- getSessJustUsername
+  message <- getTextParam "message"
+  render $ V.reportGame username message
+
+doReport :: AppHandler ()
+doReport = requireAuth $ do
+  username <- getSessJustUsername
+  opponent <- getTextParam "opponentname"
+  ownScore <- ((read :: String -> Int) . T.unpack) <$> getTextParam "ownscore"
+  opponentScore <- ((read :: String -> Int) . T.unpack) <$> getTextParam "opponentscore"
+  inFriends <- getInFriendUsernames username
+  let validOpponent = opponent `elem` inFriends
+      {-
+  liftIO $ print username
+  liftIO $ print opponent
+  liftIO $ print ownScore
+  liftIO $ print opponentScore
+  liftIO $ print validOpponent
+  liftIO $ print test
+  liftIO $ print $ scoresValid ownScore opponentScore
+-}
+  if (validOpponent && (scoresValid ownScore opponentScore))
+    then do success <- record1v1AndUpdate Offline (username, opponent) (ownScore, opponentScore)
+            if success
+              then redirect "/profile/m/reportsuccess"
+              else redirect "/servererror"
+    else redirect "/reportoffline/invalid"
+  where scoreValid score = score >= 0 && score <= 27
+        scoresValid scoreA scoreB = ((scoreA + scoreB) <= 27) && scoreValid scoreB && scoreValid scoreB
+
+viewLadder :: AppHandler ()
+viewLadder = requireAuth $  do
+  username <- getSessJustUsername
+  ladder <- getLadder
+  render $ V.viewLadder username ladder --[("foo", Nothing)]
+        
+
+test :: AppHandler ()
+test = do
+  success <- record1v1AndUpdate Offline ("lennartj", "arun_bassoon") (10, 17)
+  writeText $ T.pack $ show success
 
 
 notFound :: AppHandler ()

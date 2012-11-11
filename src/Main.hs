@@ -37,11 +37,21 @@ appInit = makeSnaplet "setladder" "" Nothing $ do
                  
                  ("profile", C.profile),
                  ("profile/:username", C.profile),
+                 ("profile/m/:message", C.profile),
                  
                  ("friends$", C.friends),
                  ("getfriends$", C.getFriends),
                  ("addfriend$", method POST C.addFriend),
                  ("unfriend$", method POST C.unFriend),
+
+                 ("ladder$", C.viewLadder),
+                 ("reportoffline$", C.reportGame),
+                 ("reportoffline/:message", C.reportGame),
+                 ("doreport$", method POST C.doReport),
+                 ("infriendsearch$", C.infriendSearch),
+                 ("infriendsearch/:query$", C.infriendSearch),
+
+                 --("test$", C.test),
                  
                  ("static", serveDirectory "static")]
   return $ App s m

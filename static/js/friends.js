@@ -72,13 +72,6 @@ $(function() {
     
     var viewmodel = new GetFriendsViewModel();
     ko.applyBindings(viewmodel);
-/*
-    var setUnfriendUsername = function(username) {
-	return function() {
-	    viewmodel.unfriendUsername(username);
-	};
-    };
-*/
 
     $("#FriendNameInput").autocomplete({
 	source: function(request, response) {

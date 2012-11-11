@@ -4,6 +4,7 @@ module Views where
 
 import Prelude hiding (head, id, div, span)
 import qualified Prelude as P
+import Data.Maybe
 import Data.Text (Text)
 import qualified Data.Text as T
 import Text.Blaze.Html5 hiding (map)
@@ -11,8 +12,11 @@ import Text.Blaze.Internal (Attributable, textValue)
 import qualified Text.Blaze.Html5.Attributes as A
 import Data.Monoid ((<>))
 import Control.Monad
+import Data.Time
+import System.Locale (defaultTimeLocale)
 
 import Types
+import Ratings
 
 navbarEntries :: [NavbarEntry]
 navbarEntries = [
@@ -20,7 +24,8 @@ navbarEntries = [
   NavbarEntry Profile "Your profile" "/profile",
   NavbarEntry Friends "Friends" "/friends",
   NavbarHeader "Play SET!",
-  NavbarEntry ReportOffline "Report offline 1v1 game" "/reportoffline"
+  NavbarEntry ReportOffline "Report offline 1v1 game" "/reportoffline",
+  NavbarEntry ViewLadder "View 1v1 ladder" "/ladder"
   ]
 
 maybeWhen :: (Monad m) => Maybe a -> (a -> m ()) -> m ()
@@ -104,7 +109,7 @@ pageTemplateNav page titleText maybeHeadHtml username contentHtml =
 
 index :: Text -> Html
 index username = pageTemplateNav Home "Set Ladder: Home" Nothing username $ do
-  h1 "Welcome!"
+  h1  !. "page-title" $ "Welcome!"
   p "The Stanford Set Ladder is a player ranking database and system for competitive SET (the card game). Currently you can play games in real life and report the results to the Set Ladder and your and your opponent's ratings will be updated."
   h3 "Exciting features on the way"
   p "Eventually, you will be able to play games online in realtime against opponents, with an automatic matchmaking system. You will also be able play the SET Daily Puzzle and play through a full deck solitaire style to compete for the fastest time."
@@ -112,9 +117,46 @@ index username = pageTemplateNav Home "Set Ladder: Home" Nothing username $ do
 preEscapedText :: Text -> Html
 preEscapedText = preEscapedToHtml
 
+reportGame :: Text -> Text -> Html
+reportGame username message = pageTemplateNav ReportOffline "Set Ladder: Report offline game" scripts username $ do
+  h1 !. "page-title" $ "Report an Offline 1v1 Game"
+  p "Report a game played offline (not on this site) between you and someone who has added you as a friend."
+  when (message == "invalid") $ do
+    div !. "alert alert-error" $ do
+      closeButton
+      strong "Invalid data sent to server! " >> "Perhaps the user you entered has not added you as a friend?"
+  form !. "form-horizontal" ! A.action "/doreport" ! A.method "POST" $ do
+    h3 "Players"
+    div !. "control-group" $ do
+      toHtml username
+      " vs. "
+      input !+ "text" !# "OpponentInput" ! A.placeholder "Opponent username" ! A.style "width: 160px"
+        != "value: opponent, valueUpdate: 'afterkeydown'" ! A.name "opponentname"
+    h3 "Result"
+    div !. "control-group" != "css: {error: (isNaN(ownScoreValid()) && ownScore().length > 0) || (!numbersValid() && ownScore().length > 0 && opponentScore().length > 0)}" $ do
+      label !. "control-label" ! A.style "text-align: left" $ do
+        toHtml username
+        " got "
+      input !+ "text" !# "YourScore" ! A.placeholder "Your score" ! A.style "width: 120px"
+        != "value: ownScore, valueUpdate: 'afterkeydown'" ! A.name "ownscore"
+      " sets"
+      span !. "help-block" != "text: ownScoreErrorText, visible: ownScoreErrorText().length > 0" $ empty
+    div !. "control-group" != "css: {error: (isNaN(opponentScoreValid()) && opponentScore().length > 0) || (!numbersValid() && ownScore().length > 0 && opponentScore().length > 0)}" $ do
+      label !. "control-label" ! A.style "text-align: left" $ do
+        span != "text: opponent() == '' ? '[opponent]' : opponent()" $ empty
+        " got "
+      input !+ "text" !# "OpponentScore" ! A.placeholder "Opponent's score" ! A.style "width: 120px"
+        != "value: opponentScore, valueUpdate: 'afterkeydown'" ! A.name "opponentscore"
+      " sets"
+      span !. "help-block" != "text: opponentScoreErrorText, visible: opponentScoreErrorText().length > 0" $ empty
+      span !. "help-block" != "text: numbersValidText, visible: numbersValidText().length > 0" $ empty
+    input !+ "submit" !. "btn" != "enable: submitButtonState(), buttonEnable: submitButtonState()" ! A.value "Report game"
+  where scripts = Just $ do
+          script ! A.src "/static/js/reportgame.js" $ empty
+
 friends :: Text -> [Text] -> [Text] -> Html
 friends username outFriends inFriends = pageTemplateNav Friends "Set Ladder: Friends" scripts username $ do
-  h1 "Friends"
+  h1  !. "page-title" $ "Friends"
   p "Adding friends makes it easier to keep track of their ratings and game records, and also allows them to report offline 1v1 games between the two of you. Simply type their usernames below to add them to your list of friends."
   form !. "form-inline" ! A.action "javascript:void(0)" $ do
     input !+ "text" !# "FriendNameInput"
@@ -173,21 +215,81 @@ friends username outFriends inFriends = pageTemplateNav Friends "Set Ladder: Fri
             T.intercalate ", " (map (T.pack . show) outFriends) <> "];"
           script ! A.src "/static/js/friends.js" $ empty
 
-userProfileNoTemplate :: Text -> Text -> Text -> Html
-userProfileNoTemplate username realname location = do
-  h1 $ toHtml $ "User profile of " <> username
+viewLadder :: Text -> [(Text, Maybe Rating)] -> Html
+viewLadder username userRatings = pageTemplateNav ViewLadder "Set Ladder: 1v1 Ladder" Nothing username $ do
+  h1  !. "page-title" $ "The 1v1 Ladder"
+  table !. "table table-condensed" $ do
+    thead $ do
+      tr $ do
+        th "Rank"
+        th "Username"
+        th "Rating"
+    tbody $ do
+      forM_ (zip userRatings [1..]) $ \((name, ratingM), rank) -> do
+        tr !. (if name == username then "highlight" else "") $ do
+          td $ do
+            when (isJust ratingM) $ toHtml (rank :: Int)
+            return ()
+          td $ toHtml name
+          td $ case ratingM of
+            Just rating -> toHtml rating
+            Nothing -> span !. "muted" $ "(none)"
+          td $ do
+            a ! A.href (textValue $ "/profile/" <> name) $ "View profile"
+
+userProfileNoTemplate :: Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
+userProfileNoTemplate username realname location rating recentGames message = do
+  h1 !. "page-title" $ toHtml $ "User profile of " <> username
   p $ do
     strong "Real name: "
     toHtmlNoneGiven realname
   p $ do
     strong "Location: "
     toHtmlNoneGiven location
+  when (message == "reportsuccess") $ do
+    div !. "alert alert-success" $ do
+      closeButton
+      strong "Offline game report successful!"
+  div !. "row" $ do
+    div !. "span3" $ do
+      h3 "1v1 SET Rating"
+      if isJust rating
+        then div !. "rating" $ toHtml $ fromJust rating
+        else toHtmlNoneGiven ""
+    div !. "span6" $ do
+      h3 "Recent 1v1 games"
+      if null recentGames
+        then toHtmlNoneGiven ""
+        else table !. "table table-condensed" $ do
+        thead $ do
+          tr $ do
+            th "Versus"
+            th "Result"
+            th "Rating"
+            th "Date (GMT)"
+        tbody $ do
+          forM_ recentGames $ \gameRecord -> do
+            tr $ do
+              td $ toHtml $ grVersus gameRecord
+              td $ do
+                toResult (grOwnScore gameRecord) (grOpponentScore gameRecord)
+                toHtml $ grOwnScore gameRecord
+                "-"
+                toHtml $ grOpponentScore gameRecord
+              td $ do
+                toHtml $ grRating gameRecord
+              td $ do
+                toHtml $ formatTime defaultTimeLocale "%-D %-R" (grTime gameRecord)
+  where toResult ownScore opponentScore
+          | ownScore > opponentScore = span !. "text-success" $ "Win "
+          | opponentScore > ownScore = span !. "text-error" $ "Lose "
+          | otherwise = "Tie "
 
-userProfile :: Text -> Text -> Text -> Html
-userProfile username realname location = pageTemplateNav Other ("Set Ladder: Profile of " <> username) Nothing username $ userProfileNoTemplate username realname location
+userProfile :: Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
+userProfile username realname location rating recentGames message = pageTemplateNav Other ("Set Ladder: Profile of " <> username) Nothing username $ userProfileNoTemplate username realname location rating recentGames message
 
-userSelfProfile :: Text -> Text -> Text -> Html
-userSelfProfile username realname location = pageTemplateNav Profile "Set Ladder: Your profile" Nothing username $ userProfileNoTemplate username realname location
+userSelfProfile :: Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
+userSelfProfile username realname location rating recentGames message = pageTemplateNav Profile "Set Ladder: Your profile" Nothing username $ userProfileNoTemplate username realname location rating recentGames message
 
 toHtmlNoneGiven :: Text -> Html
 toHtmlNoneGiven t =

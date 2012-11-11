@@ -22,8 +22,10 @@ import Data.List
 import Data.Char
 import Numeric (showHex)
 import qualified Text.Email.Validate as Email
+import Data.Time
 
 import Types
+import Ratings
 
 -- USER (user authentication, user data validation, user lookup) --
 
@@ -61,7 +63,8 @@ commitUser (User username passHash salt email realName location) = do
   maybeWithDB $ M.insert "users" [
     "username" =: username, "passHash" =: B.unpack passHash,
     "salt" =: B.unpack salt, "email" =: email,
-    "realname" =: realName, "location" =: location]
+    "realname" =: realName, "location" =: location, "1v1rating" =: defaultRating]
+  where defaultRating = (1500 :: Int)
 
 createAndCommitUser :: Text -> Text -> Text -> Text -> Text ->
                        AppHandler (Maybe M.Value)
@@ -120,6 +123,16 @@ getMatchingNames username = do
     Nothing -> return []
     Just names -> return $ map (T.pack . fromJust . (!? "username")) names
 
+getMatchingInfriends :: Text -> Text -> AppHandler [Text]
+getMatchingInfriends username query = do
+  maybeResult <- maybeWithDB $ do
+    cursor <- M.find (M.select ["username" =: ["$regex" =: (T.unpack query), "$options" =: ("i"::String)],
+                                "friendswith" =: username] "friends"){M.project = ["username" =: (1::Int)]}
+    M.rest cursor
+  case maybeResult of
+    Nothing -> return []
+    Just names -> return $ map (T.pack . fromJust . (!? "username")) names
+
 arePasswordsGood :: Text -> Text -> Bool
 arePasswordsGood pass1 pass2 =
   (not $ T.null pass1) && (not $ T.null pass2) && (pass1 == pass2)
@@ -152,6 +165,17 @@ getInFriendUsernames username = do
     Nothing -> return []
     Just names -> return $ map (T.pack . fromJust . (!? "username")) names
 
+isFriendsWith :: Text -> Text -> AppHandler Bool
+isFriendsWith username friendName = do
+  maybeResult <- maybeWithDB $ 
+    M.count $ M.select ["username" =: username, "friendwith" =: friendName] "friends"
+  liftIO $ do
+    putStrLn "hello"
+    print username
+    print friendName
+    print maybeResult
+  return $ maybe False (>= 1) maybeResult
+
 addFriendship :: Text -> Text -> AppHandler Bool
 addFriendship username friendName = do
   maybeResult <- maybeWithDB $ M.insert "friends" ["username" =: username, "friendswith" =: friendName]
@@ -163,3 +187,98 @@ doUnfriend username friendName = do
     M.delete $ M.select ["username" =: username, "friendswith" =: friendName] "friends"
   return $ isJust maybeResult
 
+
+-- 1V1 RATINGS
+
+-- | Put a game record in the db.
+record1v1Game :: GameType -> (Text, Text) -> (Score, Score) -> (Rating, Rating) -> AppHandler Bool
+record1v1Game gametype player score newRating = do
+  time <- liftIO $ getCurrentTime
+  maybeResult <- maybeWithDB $ M.insert "gamerecords"
+                 ["playerA" =: (fst player), "playerB" =: (snd player),
+                  "scoreA" =: (fst score), "scoreB" =: (snd score),
+                  "newRatingA" =: (fst newRating),
+                  "newRatingB" =: (snd newRating),
+                  "gametype" =: show gametype, "time" =: time]
+  return $ isJust maybeResult
+
+getRecentGames :: Text -> AppHandler [GameRecordDisplay]
+getRecentGames username = do
+  maybeResult <- maybeWithDB $ do
+    cursor <- M.find (M.select ["$or" =: [["playerA" =: username], ["playerB" =: username]]] "gamerecords")
+      {M.limit = 10, M.sort = ["time" =: (-1::Int)]}
+    M.rest cursor
+  if isJust maybeResult
+    then do
+    let result = fromJust maybeResult
+    return $ map makeGameRecordDisplay result
+    else return []
+  where makeGameRecordDisplay doc =
+          if (fromJust (doc !? "playerA") == username)
+          then GameRecordDisplay Offline
+               (fromJust $ doc !? "playerB")
+               (fromJust $ doc !? "scoreA")
+               (fromJust $ doc !? "scoreB")
+               (fromJust $ doc !? "newRatingA")
+               (fromJust $ doc !? "time")
+          else GameRecordDisplay Offline
+               (fromJust $ doc !? "playerA")
+               (fromJust $ doc !? "scoreB")
+               (fromJust $ doc !? "scoreA")
+               (fromJust $ doc !? "newRatingB")
+               (fromJust $ doc !? "time")
+
+get1v1Rating :: Bool -> Text -> AppHandler (DBEither Rating)
+get1v1Rating useDefault username = do
+  maybeResult <- maybeWithDB $ M.findOne
+                 (M.select ["username" =: username] "users"){M.project = ["1v1rating" =: (1::Int)]}
+  case maybeResult of
+    Nothing -> return $ Left DBFail
+    Just Nothing -> return $ Left ResultFail
+    Just (Just doc) -> do
+      let maybeRating = doc !? "1v1rating"
+      if useDefault
+        then return $ Right $ maybe defaultRating id maybeRating
+        else if isJust maybeRating
+             then return $ Right $ fromJust maybeRating
+             else return $ Left ResultFail
+  where defaultRating = 1500
+
+get1v1RatingPlayers :: (Text, Text) -> AppHandler (DBEither (Rating, Rating))
+get1v1RatingPlayers player = do
+  ratingAE <- get1v1Rating True (fst player)
+  case ratingAE of
+    Left e -> return $ Left e
+    Right ratingA -> do
+      ratingBE <- get1v1Rating True (snd player)
+      case ratingBE of
+        Left e -> return $ Left e
+        Right ratingB -> do
+          return $ return (ratingA, ratingB)
+
+set1v1Rating :: Text -> Rating -> AppHandler Bool
+set1v1Rating username rating = do
+  let modifier = ["$set" =: ["1v1rating" =: rating]]
+  maybeResult <- maybeWithDB $ M.modify (M.select ["username" =: username] "users") modifier
+  return $ isJust maybeResult
+
+record1v1AndUpdate :: GameType -> (Text, Text) -> (Score, Score) -> AppHandler Bool
+record1v1AndUpdate gametype player score = do
+  ratingE <- get1v1RatingPlayers player
+  case ratingE of
+    Left _ -> return False
+    Right rating -> do
+      let newRating = updateRatings score rating
+      successR <- record1v1Game gametype player score newRating
+      successA <- set1v1Rating (fst player) (fst newRating)
+      successB <- set1v1Rating (snd player) (snd newRating)
+      return $ successR && successA && successB
+
+getLadder :: AppHandler [(Text, Maybe Rating)]
+getLadder = do
+  maybeResult <- maybeWithDB $ do
+    cursor <- M.find (M.select [] "users"){M.sort = ["1v1rating" =: (-1::Int)]}
+    M.rest cursor
+  case maybeResult of
+    Nothing -> return []
+    Just result -> return $ map (\doc -> (fromJust $ doc !? "username", doc !? "1v1rating")) result

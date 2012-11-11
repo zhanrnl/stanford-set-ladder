@@ -9,6 +9,9 @@ import Data.Lens.Template
 import Snap.Snaplet.MongoDB
 import qualified Control.Category as Cat
 import Data.Text (Text)
+import Data.Time
+
+import Ratings
 
 data App = App {
   _sess  :: Snaplet SessionManager,
@@ -24,12 +27,23 @@ data DBError = DBFail | ResultFail deriving (Eq, Show)
 type DBEither a = Either DBError a
 
 -- For ratings
-data GameType = Offline | Other
-              deriving (Show, Eq)
+data GameType = Offline
+              deriving (Eq, Read)
+instance Show GameType where
+  show Offline = "offline"
+
+data GameRecordDisplay =
+  GameRecordDisplay {grGametype :: GameType,
+                     grVersus :: Text,
+                     grOwnScore :: Score,
+                     grOpponentScore :: Score,
+                     grRating :: Rating,
+                     grTime :: UTCTime}
+  deriving (Show, Eq)
 
 -- View types
 data PageName = Home | Profile | Friends
-              | ReportOffline
+              | ReportOffline | ViewLadder
               | Other
               deriving (Show, Eq)
 data NavbarEntry = NavbarEntry {pageName :: PageName,

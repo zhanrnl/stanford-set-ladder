@@ -5,6 +5,7 @@ body {
 h1, h2, h3 {
     font-family: "PTSansBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 1);
     /*line-height: 1;*/
 }
 
@@ -12,7 +13,7 @@ h1, h2 {
     margin-top: 20px;
 }
 
-h1:first-child, h2:first-child {
+h1.page-title {
     margin-top: 4px;
 }
 
@@ -26,6 +27,10 @@ a {
 
 a:hover {
     color: #d16866;
+}
+
+.muted {
+    color: #777;
 }
 
 .well {
@@ -142,7 +147,24 @@ h1.logoText {
     padding-top: 14px;
 }
 
+/* Table */
+
+.highlight {
+    font-weight: bold;
+    color: #eee;
+    background-color: #080808;
+}
+
+/* Profile */
+
+.rating {
+    line-height: 1;
+    font-size: 50pt;
+    font-family: "PTSansBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 /* other */
+
 button#AddFriendButton {
     margin-left: 6px;
 }
