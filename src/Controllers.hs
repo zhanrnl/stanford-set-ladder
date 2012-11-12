@@ -195,14 +195,15 @@ profileUser message username = do
     Left DBFail -> redirect "/servererror"
     Left ResultFail -> notFound
     Right user -> do
-      let userProfileView =
+      let userProfileView = V.userProfile
+            {-
             if self == username
             then V.userSelfProfile
-            else V.userProfile
+            else V.userProfile-}
           rating = case ratingE of
             Left _ -> Nothing
             Right r -> Just r 
-      render $ userProfileView (getUsername user) (getUserRealName user)
+      render $ userProfileView self (getUsername user) (getUserRealName user)
         (getUserLocation user) rating recentGames message
 
 reportGame :: AppHandler ()

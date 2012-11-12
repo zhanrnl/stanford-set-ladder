@@ -285,8 +285,8 @@ userProfileNoTemplate username realname location rating recentGames message = do
           | opponentScore > ownScore = span !. "text-error" $ "Lose "
           | otherwise = "Tie "
 
-userProfile :: Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
-userProfile username realname location rating recentGames message = pageTemplateNav Other ("Set Ladder: Profile of " <> username) Nothing username $ userProfileNoTemplate username realname location rating recentGames message
+userProfile :: Text -> Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
+userProfile self username realname location rating recentGames message = pageTemplateNav Other ("Set Ladder: Profile of " <> username) Nothing self $ userProfileNoTemplate username realname location rating recentGames message
 
 userSelfProfile :: Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
 userSelfProfile username realname location rating recentGames message = pageTemplateNav Profile "Set Ladder: Your profile" Nothing username $ userProfileNoTemplate username realname location rating recentGames message

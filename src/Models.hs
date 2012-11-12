@@ -63,7 +63,7 @@ commitUser (User username passHash salt email realName location) = do
   maybeWithDB $ M.insert "users" [
     "username" =: username, "passHash" =: B.unpack passHash,
     "salt" =: B.unpack salt, "email" =: email,
-    "realname" =: realName, "location" =: location, "1v1rating" =: defaultRating]
+    "realname" =: realName, "location" =: location]
   where defaultRating = (1500 :: Int)
 
 createAndCommitUser :: Text -> Text -> Text -> Text -> Text ->
