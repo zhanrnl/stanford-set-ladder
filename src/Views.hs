@@ -281,13 +281,69 @@ userProfile self username realname location rating recentGames message =
              else Other
   in pageTemplateNav page title Nothing self $ [shamlet|
   <h1 class="page-header">User profile of #{username}
-  <p>
-    <strong>Real name:
-    #{toHtmlNoneGiven realname}
-  <p>
-    <strong>Location:
-    #{toHtmlNoneGiven location}
-  $if (message == "reportsuccess")
+  $if isSelfProfile
+    <div class="modal hide fade" id="ChangeRealNameModal" 
+      tabindex="-1" role="dialog">
+      <div class="modal-header">
+        #{modalCloseButton}
+        <h3>Change your real name
+      <form action="/changerealname" method="POST" class="modal-form">
+        <div class="modal-body">
+          <p>Enter a new real name that will appear publicly on your profile. We prefer if you use your actual name.
+          <input type="text" name="newname" placeholder="New real name" 
+           value="#{realname}">
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Cancel
+          <input type="submit" class="btn btn-primary" value="Change name">
+    <div class="modal hide fade" id="ChangeLocationModal" 
+      tabindex="-1" role="dialog">
+      <div class="modal-header">
+        #{modalCloseButton}
+        <h3>Change your location
+      <form action="/changelocation" method="POST" class="modal-form">
+        <div class="modal-body">
+          <p>Enter your location (where you live or work, or where you're from) that will appear publicly on your profile.
+          <input type="text" name="newlocation" placeholder="New location" 
+           value="#{location}">
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal">Cancel
+          <input type="submit" class="btn btn-primary" value="Change location">
+    $if message == "namechangesuccess"
+      <div class="alert alert-success">
+        #{closeButton}
+        <strong>Successfully changed real name!
+    $if message == "namechangefail"
+      <div class="alert alert-error">
+        #{closeButton}
+        <strong>Name change failed!
+    $if message == "locationchangesuccess"
+      <div class="alert alert-success">
+        #{closeButton}
+        <strong>Successfully changed location!
+    $if message == "locationchangefail"
+      <div class="alert alert-error">
+        #{closeButton}
+        <strong>Location change failed!
+    <table class="profile-table">
+      <tr>
+        <th>Real name:
+        <td>#{toHtmlNoneGiven realname} 
+        <td><a href="#ChangeRealNameModal" data-toggle="modal"
+             class="btn btn-small btn-inverse pull-right">Change
+      <tr>
+        <th>Location:
+        <td>#{toHtmlNoneGiven location}
+        <td><a href="#ChangeLocationModal" data-toggle="modal"
+             class="btn btn-small btn-inverse pull-right">Change
+  $else
+    <table class="profile-table">
+      <tr>
+        <th>Real name:
+        <td>#{toHtmlNoneGiven realname}
+      <tr>
+        <th>Location:
+        <td>#{toHtmlNoneGiven location}
+  $if message == "reportsuccess"
     <div class="alert alert-success">
       #{closeButton}
       <strong>Offline game report successful!
@@ -314,7 +370,8 @@ userProfile self username realname location rating recentGames message =
             $forall gameRecord <- recentGames
               <tr>
                 <td>
-                  <a href=#{"/profile/" <> grVersus gameRecord}>#{grVersus gameRecord}
+                  <a href=#{"/profile/" <> grVersus gameRecord}>
+                    #{grVersus gameRecord}
                 <td>
                   #{toResult (grOwnScore gameRecord) (grOpponentScore gameRecord)}
                   #{grOwnScore gameRecord}-#{grOpponentScore gameRecord}

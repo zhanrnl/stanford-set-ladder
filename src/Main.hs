@@ -38,6 +38,8 @@ appInit = makeSnaplet "setladder" "" Nothing $ do
                  ("profile", C.profile),
                  ("profile/:username", C.profile),
                  ("profile/m/:message", C.profile),
+                 ("changerealname", method POST C.changeRealName),
+                 ("changelocation", method POST C.changeLocation),
                  
                  ("friends$", C.friends),
                  ("getfriends$", C.getFriends),

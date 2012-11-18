@@ -182,8 +182,6 @@ profile = requireAuth $ do
     then profileSelf message
     else profileUser "" usernameParam
 
--- TODO: Add different implementation here, needs to render a different view to
--- have edit controls on page
 profileSelf :: Text -> AppHandler ()
 profileSelf message = getSessJustUsername >>= profileUser message
 
@@ -202,6 +200,24 @@ profileUser message username = do
             Right r -> Just r 
       render $ V.userProfile self (getUsername user) (getUserRealName user)
         (getUserLocation user) rating recentGames message
+
+changeRealName :: AppHandler ()
+changeRealName = requireAuth $ do
+  self <- getSessJustUsername
+  newName <- getTextParam "newname"
+  success <- setRealName self newName
+  if success
+    then redirect "/profile/m/namechangesuccess"
+    else redirect "/profile/m/namechangefail"
+         
+changeLocation :: AppHandler ()
+changeLocation = requireAuth $ do
+  self <- getSessJustUsername
+  newLocation <- getTextParam "newlocation"
+  success <- setLocation self newLocation
+  if success
+    then redirect "/profile/m/locationchangesuccess"
+    else redirect "/profile/m/locationchangefail"
 
 reportGame :: AppHandler ()
 reportGame = requireAuth $ do

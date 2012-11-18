@@ -13,6 +13,10 @@ h1, h2 {
     margin-top: 20px;
 }
 
+h1 {
+    font-size: 32px;
+}
+
 h1.page-title {
     margin-top: 4px;
 }
@@ -163,6 +167,19 @@ h1.logoText {
     line-height: 1;
     font-size: 50pt;
     font-family: "PTSansBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.modal-form {
+    margin-bottom: 0;
+}
+
+.profile-table th {
+    padding-right: 5px;
+    text-align: left;
+}
+
+.profile-table td {
+    padding-right: 15px;
 }
 
 /* Friends */

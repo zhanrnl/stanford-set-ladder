@@ -145,6 +145,20 @@ isUserDataValid username password1 password2 email = do
       emailGood = Email.isValid $ T.unpack email
   return (usernameGood && passwordsGood && emailGood)
 
+setRealName :: Text -> Text -> AppHandler Bool
+setRealName username newName = do
+  maybeResult <- maybeWithDB $ do
+    let modifier = ["$set" =: ["realname" =: newName]]
+    M.modify (M.select ["username" =: username] "users") modifier
+  return $ isJust maybeResult
+  
+setLocation :: Text -> Text -> AppHandler Bool
+setLocation username newLocation = do
+  maybeResult <- maybeWithDB $ do
+    let modifier = ["$set" =: ["location" =: newLocation]]
+    M.modify (M.select ["username" =: username] "users") modifier
+  return $ isJust maybeResult
+
 
 -- FRIENDS
 
