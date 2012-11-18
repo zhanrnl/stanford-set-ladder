@@ -22,7 +22,7 @@ $(function() {
 	    if (self.ownScore().length == 0) return '';
 	    var score = self.ownScoreValid();
 	    if (isNaN(score)) {
-		return 'Must be an integer 0-27.';
+		return 'Scores must be integers 0-27.';
 	    }
 	    return '';
 	});
@@ -34,7 +34,7 @@ $(function() {
 	    if (self.opponentScore().length == 0) return '';
 	    var score = self.opponentScoreValid();
 	    if (isNaN(score)) {
-		return 'Must be an integer 0-27.';
+		return 'Scores must be integers 0-27.';
 	    } 
 	    return '';
 	});

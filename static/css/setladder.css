@@ -57,7 +57,9 @@ a:hover {
 }
 
 .page-header {
+    margin-top: 0;
     padding-bottom: 0;
+    margin-bottom: 15px;
 }
 
 .help-block, .help-inline {
@@ -152,7 +154,7 @@ h1.logoText {
 .highlight {
     font-weight: bold;
     color: #eee;
-    background-color: #080808;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 /* Profile */
@@ -163,8 +165,31 @@ h1.logoText {
     font-family: "PTSansBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* other */
+/* Friends */
 
 button#AddFriendButton {
     margin-left: 6px;
+}
+
+/* Report game */
+
+.report-game-form-table {
+    margin-bottom: 10px;
+}
+
+.report-game-form-table th {
+    text-align: left;
+    padding-right: 25px;
+}
+
+.report-game-form-table td {
+    padding-right: 10px;
+}
+
+.report-game-form-table tr.error {
+    color: #FC5B5E;
+}
+
+.report-game-form-table input {
+    margin-top: 7px;
 }

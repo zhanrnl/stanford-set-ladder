@@ -117,17 +117,18 @@ isUsernameAvailable username = do
 getMatchingNames :: Text -> AppHandler [Text]
 getMatchingNames username = do
   maybeResult <- maybeWithDB $ do
-    cursor <- M.find (M.select ["username" =: ["$regex" =: (T.unpack username), "$options" =: ("i"::String)]] "users"){M.project = ["username" =: (1::Int)]}
+    cursor <- M.find (M.select ["username" =: ["$regex" =: (T.unpack username), "$options" =: ("i"::String)]]
+                      "users"){M.project = ["username" =: (1::Int)]}
     M.rest cursor
   case maybeResult of
     Nothing -> return []
     Just names -> return $ map (T.pack . fromJust . (!? "username")) names
 
 getMatchingInfriends :: Text -> Text -> AppHandler [Text]
-getMatchingInfriends username query = do
+getMatchingInfriends self query = do
   maybeResult <- maybeWithDB $ do
     cursor <- M.find (M.select ["username" =: ["$regex" =: (T.unpack query), "$options" =: ("i"::String)],
-                                "friendswith" =: username] "friends"){M.project = ["username" =: (1::Int)]}
+                                "friendswith" =: self] "friends"){M.project = ["username" =: (1::Int)]}
     M.rest cursor
   case maybeResult of
     Nothing -> return []
