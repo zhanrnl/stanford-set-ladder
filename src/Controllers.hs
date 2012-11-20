@@ -13,15 +13,18 @@ import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import Data.ByteString.Char8 (ByteString)
---import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Lazy as BL
 import Data.Text.Encoding
 import Control.Monad.Trans
 import Data.Aeson ((.=))
 import qualified Data.Aeson as AE
+import Data.Monoid ((<>))
 
 import qualified Views as V
 import Types
 import Models
+import SetHelpers
 
 
 render :: Html -> AppHandler ()
@@ -47,7 +50,7 @@ getSessUsername = with sess $ getFromSession "username"
 getSessJustUsername :: AppHandler Text
 getSessJustUsername = maybe "" id <$> getSessUsername
 
-getTextParam :: ByteString -> AppHandler Text
+getTextParam :: B.ByteString -> AppHandler Text
 getTextParam paramName = decodeUtf8 . (maybe "" id) <$> getParam paramName
 
 -- CONTROLLERS
@@ -247,6 +250,21 @@ viewLadder = requireAuth $  do
   self <- getSessJustUsername
   ladder <- getLadder
   render $ V.viewLadder self ladder
+
+practicePuzzle :: AppHandler ()
+practicePuzzle = requireAuth $ do
+  self <- getSessJustUsername
+  render $ V.practicePuzzle self
+
+playPracticePuzzle :: AppHandler ()
+playPracticePuzzle = requireAuth $ do
+  self <- getSessJustUsername
+  puzzle <- liftIO $ makePuzzle
+  let cardNames = map (T.pack . show . fst) puzzle
+      cardJSON = decodeUtf8 $ toStrict $ AE.encode (zip cardNames $ map snd puzzle)
+  render $ V.playPracticePuzzle self cardJSON
+  where toStrict = B.concat . BL.toChunks
+
         
 {-
 test :: AppHandler ()

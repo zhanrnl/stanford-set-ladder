@@ -31,6 +31,7 @@ navbarEntries = [
   NavbarEntry Profile "Your profile" "/profile",
   NavbarEntry Friends "Friends" "/friends",
   NavbarHeader "Play SET!",
+  NavbarEntry PracticePuzzle "Puzzle mode practice" "/practicepuzzle",
   NavbarEntry ReportOffline "Report offline 1v1 game" "/reportoffline",
   NavbarEntry ViewLadder "View 1v1 ladder" "/ladder"]
 
@@ -270,6 +271,28 @@ viewLadder username userRatings = pageTemplateNav ViewLadder "Set Ladder: 1v1 La
         highlightName name self = if name == self then "highlight" else ""
         profileLink = ("/profile/" <>)
 
+practicePuzzle :: Text -> Html
+practicePuzzle self = pageTemplateNav PracticePuzzle "Set Ladder: Puzzle mode practice" Nothing self $ [shamlet|
+  <h1 class="page-header">Puzzle mode practice
+  <p>Practice solving 12-card SET puzzles (like the SET Daily Puzzle) by yourself, without worrying about rankings. A random 12-card puzzle will be generated and your score will not be recorded. Click the button below to begin.
+  <a href="/play/practicepuzzle" class="btn btn-success">Start puzzle mode practice
+  <h3>Rules
+  <p>The 12 cards shown will contain six sets within them, without removing or replacing any cards. Some cards may be used in more than one set. Find all six sets in the fastest time possible!
+  <p>To select cards, you can either click on them with your mouse, or use the keyboard. The cards will be mapped to the letters A through L. Click or type a letter again to deselect a card.
+  |]
+
+playPracticePuzzle :: Text -> Text -> Html
+playPracticePuzzle self cardJSON =
+  pageTemplate "Practice SET Puzzle" scripts self $ [shamlet|
+  <div class="row">
+    <div class="span4" id="LeftPanel">
+      <h1 data-bind="visible: !showCards()">Loading...
+    <div class="span8" id="CardContainer" data-bind="visible: showCards">
+  |]
+  where scripts = Just $ do
+          script $ preEscapedText $ "var cards=" <> cardJSON <> ";"
+          script ! A.src "/static/js/playPracticePuzzle.js" $ ""
+
 userProfile :: Text -> Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
 userProfile self username realname location rating recentGames message =
   let isSelfProfile = (self == username)
@@ -316,7 +339,7 @@ userProfile self username realname location rating recentGames message =
       <div class="alert alert-error">
         #{closeButton}
         <strong>Name change failed!
-    $if message == "locationchangesuccess"
+    $if message == "success"
       <div class="alert alert-success">
         #{closeButton}
         <strong>Successfully changed location!

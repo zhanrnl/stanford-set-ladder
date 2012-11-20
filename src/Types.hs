@@ -44,6 +44,7 @@ data GameRecordDisplay =
 -- View types
 data PageName = Home | Profile | Friends
               | ReportOffline | ViewLadder
+              | PracticePuzzle
               | Other
               deriving (Show, Eq)
 data NavbarEntry = NavbarEntry {pageName :: PageName,

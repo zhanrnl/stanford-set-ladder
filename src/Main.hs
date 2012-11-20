@@ -53,6 +53,9 @@ appInit = makeSnaplet "setladder" "" Nothing $ do
                  ("infriendsearch$", C.infriendSearch),
                  ("infriendsearch/:query$", C.infriendSearch),
 
+                 ("practicepuzzle$", C.practicePuzzle),
+                 ("play/practicepuzzle$", C.playPracticePuzzle),
+
                  --("test$", C.test),
                  
                  ("static", serveDirectory "static")]
