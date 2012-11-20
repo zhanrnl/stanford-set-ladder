@@ -337,8 +337,9 @@ $(function() {
 	});
     };
 
-    $(document).keypress(function(event) {
+    $(document).keydown(function(event) {
 	var keyCode = event.keyCode;
+	console.log(keyCode);
 	var cardNum;
 	if (keyCode >= 65 && keyCode <= 76) {
 	    cardNum = keyCode - 65;
