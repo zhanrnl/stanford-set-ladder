@@ -84,7 +84,7 @@ $(function() {
 
     // deal with redirecting out when we shouldn't be here
     $.get('/ajax/hasstarted', function(data) {
-	if (data == 'true') {
+	if (data == 'true' && mode == 'daily') {
 	    window.location.replace("/dailypuzzle");
 	}
     });
@@ -144,7 +144,8 @@ $(function() {
 	self.windowHeight = ko.observable(0);
 	self.cardWidth = ko.computed(function() {
 	    var totalHeight = self.windowHeight() - 150;
-	    var totalWidth = Math.min(self.windowWidth(), 
+	    var totalWidth = Math.min(self.windowWidth() - 
+				      $('#CardContainer').offset().left, 
 				      $('#CardContainer').width()) - 30;
 	    var cardWidthA = (totalHeight / 4) * (320 / 200);
 	    var cardWidthB = totalWidth / 3;

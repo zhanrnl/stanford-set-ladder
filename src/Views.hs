@@ -493,7 +493,7 @@ userProfile self username realname location rating recentGames recentPuzzleTimes
                 <td>
                   #{formatTime defaultTimeLocale "%-D %-R" (grTime gameRecord)}
       <h3>Recent Daily Puzzle Times
-      $if null recentGames
+      $if null recentPuzzleTimes
         #{toHtmlNoneGiven ""}
       $else
         <table class="table table-condensed">
