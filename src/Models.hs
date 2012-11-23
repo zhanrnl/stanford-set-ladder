@@ -431,7 +431,8 @@ getRecentPuzzleTimes :: Text -> AppHandler [PuzzleTimeDisplay]
 getRecentPuzzleTimes username = do
   day <- today
   maybeResult <- maybeWithDB $ do
-    cursor <- M.find (M.select ["$or" =: [["status" =: ("complete"::Text)],
+    cursor <- M.find (M.select ["username" =: username,
+                                "$or" =: [["status" =: ("complete"::Text)],
                                           ["status" =: ("dnf"::Text)]]]
                       "dailypuzzlerecords"){M.sort = ["day" =: (-1::Int)],
                                             M.limit = 10}
