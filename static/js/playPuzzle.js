@@ -429,10 +429,11 @@ $(function() {
     for (var i = 0; i < 12; i++) {
 	var img = $('<img>')
 	    .attr({'src': viewmodel.toFilename(cards[i][0]),
-		   'data-bind': 'attr: {width: cardWidth}, click: cardClickedFn(' + i + '), css: {cardSelected: cardSelected[' + i + ']()}'
+		   'data-bind': 'attr: {width: cardWidth}, css: {cardSelected: cardSelected[' + i + ']()}'
 		  })
 	    .addClass('mediumCorners dropShadow')
-	    .load(makeLoadFunction(i));
+	    .load(makeLoadFunction(i))
+	    .click(viewmodel.cardClickedFn(i));
 	images[i] = $('<div>').append(
 	    $('<div>')
 		.addClass('cardLabel')
