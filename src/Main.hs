@@ -55,6 +55,15 @@ appInit = makeSnaplet "setladder" "" Nothing $ do
 
                  ("practicepuzzle$", C.practicePuzzle),
                  ("play/practicepuzzle$", C.playPracticePuzzle),
+                 ("dailypuzzle$", C.dailyPuzzle),
+                 ("play/dailypuzzle$", C.playDailyPuzzle),
+                 ("ajax/puzzlestarted", C.puzzleStarted),
+                 ("ajax/puzzlecompleted", C.puzzleCompleted),
+                 ("ajax/puzzleDNF", C.puzzleDNF),
+                 ("ajax/hasstarted", C.hasStartedPuzzle),
+
+                 ("puzzleladder", C.puzzleLadder),
+                 ("puzzleladder/:offset", C.puzzleLadder),
 
                  --("test$", C.test),
                  

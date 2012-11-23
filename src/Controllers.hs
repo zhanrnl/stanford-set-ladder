@@ -20,6 +20,8 @@ import Control.Monad.Trans
 import Data.Aeson ((.=))
 import qualified Data.Aeson as AE
 import Data.Monoid ((<>))
+import Data.Time
+import qualified Data.Map as M
 
 import qualified Views as V
 import Types
@@ -194,6 +196,7 @@ profileUser message username = do
   maybeUser <- lookupUserByName username
   ratingE <- get1v1Rating False username
   recentGames <- getRecentGames username
+  recentPuzzleTimes <- getRecentPuzzleTimes username
   case maybeUser of
     Left DBFail -> redirect "/servererror"
     Left ResultFail -> notFound
@@ -202,7 +205,7 @@ profileUser message username = do
             Left _ -> Nothing
             Right r -> Just r 
       render $ V.userProfile self (getUsername user) (getUserRealName user)
-        (getUserLocation user) rating recentGames message
+        (getUserLocation user) rating recentGames recentPuzzleTimes message
 
 changeRealName :: AppHandler ()
 changeRealName = requireAuth $ do
@@ -261,18 +264,92 @@ playPracticePuzzle = requireAuth $ do
   self <- getSessJustUsername
   puzzle <- liftIO $ makePuzzle
   let cardNames = map (T.pack . show . fst) puzzle
-      cardJSON = decodeUtf8 $ toStrict $ AE.encode (zip cardNames $ map snd puzzle)
+      cardJSON = decodeUtf8 $ toStrict $
+                 AE.encode (zip cardNames $ map snd puzzle)
   render $ V.playPracticePuzzle self cardJSON
   where toStrict = B.concat . BL.toChunks
+        
+dailyPuzzle :: AppHandler ()
+dailyPuzzle = requireAuth $ do
+  self <- getSessJustUsername
+  maybeHasStarted <- hasUserStartedPuzzle self
+  case maybeHasStarted of
+    Left _ -> redirect "/servererror"
+    Right hasStarted -> do
+      render $ V.dailyPuzzle self hasStarted
+
+playDailyPuzzle :: AppHandler ()
+playDailyPuzzle = requireAuth $ do
+  self <- getSessJustUsername
+  maybeHasStarted <- hasUserStartedPuzzle self
+  case maybeHasStarted of
+    Left _ -> redirect "/servererror"
+    Right hasStarted ->
+      if hasStarted
+      then redirect "/dailypuzzle"
+      else do
+        maybePuzzle <- getDailyPuzzle  
+        case maybePuzzle of
+          Left _ -> redirect "/servererror"
+          Right puzzle -> do
+            let cardNames = map (T.pack . show . fst) puzzle
+                cardJSON = decodeUtf8 $ toStrict $
+                           AE.encode (zip cardNames $ map snd puzzle)
+            render $ V.playDailyPuzzle self cardJSON
+  where toStrict = B.concat . BL.toChunks
+
+puzzleLadder :: AppHandler ()
+puzzleLadder = requireAuth $ do
+  self <- getSessJustUsername
+  day <- today
+  offset <- getTextParam "offset"
+  let offsetDay =
+        if offset == ""
+        then day
+        else UTCTime (addDays (negate $ read $ T.unpack offset) $ utctDay day) (utctDayTime day)
+  ladder <- getPuzzleLadder offsetDay
+  if offset == ""
+    then render $ V.viewPuzzleLadder self ladder offsetDay day 0
+    else render $ V.viewPuzzleLadder self ladder offsetDay day (read $ T.unpack offset)
+
+puzzleStarted :: AppHandler ()
+puzzleStarted = requireAuth $ do
+  self <- getSessJustUsername
+  setUserStartedPuzzle self
+  return ()
+
+puzzleCompleted :: AppHandler ()
+puzzleCompleted = requireAuth $ do
+  self <- getSessJustUsername
+  timeText <- getTextParam "time"
+  if (timeText == "")
+    then puzzleDNF
+    else do
+    let time :: Integer
+        time = read (T.unpack timeText)
+    setUserCompletedPuzzle self time
+    return ()
+
+puzzleDNF :: AppHandler ()
+puzzleDNF = requireAuth $ do
+  self <- getSessJustUsername
+  setUserDNFPuzzle self
+  return ()
+
+hasStartedPuzzle :: AppHandler ()
+hasStartedPuzzle = requireAuth $ do
+  self <- getSessJustUsername
+  hasStarted <- hasUserStartedPuzzle' self
+  writeLBS $ AE.encode hasStarted
 
         
 {-
 test :: AppHandler ()
 test = do
-  success <- record1v1AndUpdate Offline ("lennartj", "arun_bassoon") (10, 17)
-  writeText $ T.pack $ show success
+  puzzle <- getDailyPuzzle
+  liftIO $ print puzzle
+  return ()
 -}
-
 
 notFound :: AppHandler ()
 notFound = do

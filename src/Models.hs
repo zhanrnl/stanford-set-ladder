@@ -25,6 +25,7 @@ import qualified Text.Email.Validate as Email
 import Data.Time
 
 import Types
+import SetHelpers
 import Ratings
 
 -- USER (user authentication, user data validation, user lookup) --
@@ -184,11 +185,6 @@ isFriendsWith :: Text -> Text -> AppHandler Bool
 isFriendsWith username friendName = do
   maybeResult <- maybeWithDB $ 
     M.count $ M.select ["username" =: username, "friendwith" =: friendName] "friends"
-  liftIO $ do
-    putStrLn "hello"
-    print username
-    print friendName
-    print maybeResult
   return $ maybe False (>= 1) maybeResult
 
 addFriendship :: Text -> Text -> AppHandler Bool
@@ -297,3 +293,154 @@ getLadder = do
   case maybeResult of
     Nothing -> return []
     Just result -> return $ map (\doc -> (fromJust $ doc !? "username", doc !? "1v1rating")) result
+
+
+-- DAILY PUZZLE
+today :: AppHandler UTCTime
+today = liftIO $ (\time -> time{utctDayTime = 0}) <$> getCurrentTime
+
+getDailyPuzzle :: AppHandler (DBEither [(Card, Int)])
+getDailyPuzzle = do
+  day <- today
+  maybeResult <- maybeWithDB $ do
+    M.findOne (M.select ["day" =: day] "dailypuzzles")
+  case maybeResult of
+    Nothing -> return $ Left DBFail
+    Just Nothing -> do
+      puzzle <- createDailyPuzzle
+      return $ Right puzzle
+    Just (Just result) -> do
+      let maybePuzzle = result !? "puzzle"
+      case maybePuzzle of
+        Nothing -> return $ Left ResultFail
+        Just puzzleNums -> return $ Right $ reconstitutePuzzle puzzleNums
+
+createDailyPuzzle :: AppHandler [(Card, Int)]
+createDailyPuzzle = do
+  puzzle <- liftIO $ makePuzzle
+  day <- today
+  maybeWithDB $ do
+    M.insert "dailypuzzles" ["day" =: day, "puzzle" =: (map snd puzzle)]
+  return puzzle
+
+hasUserStartedPuzzle :: Text -> AppHandler (DBEither Bool)
+hasUserStartedPuzzle username = do
+  day <- today
+  maybeResult <- maybeWithDB $ do
+    M.findOne $ (M.select ["username" =: username, "day" =: day] "dailypuzzlerecords")
+  case maybeResult of
+    Nothing -> return $ Left DBFail
+    Just result -> return $ Right $ isJust result
+
+-- | version without error handling that returns True by default
+hasUserStartedPuzzle' :: Text -> AppHandler Bool
+hasUserStartedPuzzle' username = do
+  maybeResult <- hasUserStartedPuzzle username
+  return $ case maybeResult of
+    Left _ -> True
+    Right b -> b
+
+hasUserFinishedPuzzle' :: Text -> AppHandler Bool
+hasUserFinishedPuzzle' username = do
+  day <- today  
+  maybeResult <- maybeWithDB $ do
+    M.findOne $ (M.select ["username" =: username, "day" =: day,
+                           "$or" =: [["status" =: ("complete"::Text)],
+                                     ["status" =: ("dnf"::Text)]]]
+                 "dailypuzzlerecords")
+  case maybeResult of
+    Nothing -> return True
+    Just result -> return $ isJust result
+
+setUserStartedPuzzle :: Text -> AppHandler Bool
+setUserStartedPuzzle username = do
+  hasStarted <- hasUserStartedPuzzle' username
+  if hasStarted
+    then return True
+    else do
+    day <- today
+    maybeResult <- maybeWithDB $ do
+      M.insert "dailypuzzlerecords" ["username" =: username, "day" =: day,
+                                     "status" =: ("started" :: Text)]
+    return $ isJust maybeResult
+
+getDayOfLastPuzzleSolve :: Text -> AppHandler (DBEither UTCTime)
+getDayOfLastPuzzleSolve username = do
+  maybeResult <- maybeWithDB $ do
+    M.findOne $ (M.select ["username" =: username]
+                 "dailypuzzlerecords"){M.sort = ["day" =: (-1::Int)]}
+  case maybeResult of
+    Nothing -> return $ Left DBFail
+    Just Nothing -> return $ Left ResultFail
+    Just (Just result) -> return $ Right $ fromJust $ result !? "day"
+
+setUserCompletedPuzzle :: Text -> Integer -> AppHandler Bool
+setUserCompletedPuzzle username time = do
+  hasFinished <- hasUserFinishedPuzzle' username
+  if hasFinished
+    then return True
+    else do
+    maybeDay <- getDayOfLastPuzzleSolve username
+    case maybeDay of
+      Left _ -> return False
+      Right day -> do
+        maybeResult <- maybeWithDB $ do
+          let modifier = ["$set" =: ["status" =: ("complete" :: Text), "time" =: time]]
+          M.modify (M.select ["username" =: username, "day" =: day]
+                    "dailypuzzlerecords") modifier
+        return $ isJust maybeResult
+  
+setUserDNFPuzzle :: Text -> AppHandler Bool
+setUserDNFPuzzle username = do
+  hasFinished <- hasUserFinishedPuzzle' username
+  if hasFinished
+    then return True
+    else do
+    maybeDay <- getDayOfLastPuzzleSolve username
+    case maybeDay of
+      Left _ -> return False
+      Right day -> do
+        maybeResult <- maybeWithDB $ do
+          let modifier = ["$set" =: ["status" =: ("dnf" :: Text)]]
+          M.modify (M.select ["username" =: username, "day" =: day]
+                    "dailypuzzlerecords") modifier
+        return $ isJust maybeResult
+
+getPuzzleLadder :: UTCTime -> AppHandler [(Text, Maybe Integer)]
+getPuzzleLadder day = do
+  maybeResult1 <- maybeWithDB $ do
+    cursor <- M.find (M.select ["day" =: day, "status" =: ("complete"::Text)]
+                      "dailypuzzlerecords"){M.sort = ["time" =: (1::Int)]}
+    M.rest cursor
+  let nonNullResults = case maybeResult1 of
+        Nothing -> []
+        Just result1 -> map (\doc -> (fromJust $ doc !? "username",
+                                      doc !? "time")) result1
+  maybeResult2 <- maybeWithDB $ do
+    cursor <- M.find (M.select ["day" =: day, "status" =: ("dnf"::Text),
+                                "time" =: (Nothing::Maybe Integer)]
+                      "dailypuzzlerecords")
+    M.rest cursor
+  let nullResults = case maybeResult2 of
+        Nothing -> []
+        Just result2 -> map (\doc -> (fromJust $ doc !? "username",
+                                      doc !? "time")) result2
+  return $ nonNullResults ++ nullResults
+
+getRecentPuzzleTimes :: Text -> AppHandler [PuzzleTimeDisplay]
+getRecentPuzzleTimes username = do
+  day <- today
+  maybeResult <- maybeWithDB $ do
+    cursor <- M.find (M.select ["$or" =: [["status" =: ("complete"::Text)],
+                                          ["status" =: ("dnf"::Text)]]]
+                      "dailypuzzlerecords"){M.sort = ["day" =: (-1::Int)],
+                                            M.limit = 10}
+    M.rest cursor
+  return $ case maybeResult of
+    Nothing -> []
+    Just results -> map (makeTimeDisplay day) results
+  where makeTimeDisplay day doc =
+          let time = doc !? "time"
+              puzzleDay = fromJust $ doc !? "day"
+              offset = utctDay day `diffDays` utctDay puzzleDay
+          in PuzzleTimeDisplay time puzzleDay offset

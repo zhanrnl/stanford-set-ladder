@@ -41,10 +41,17 @@ data GameRecordDisplay =
                      grTime :: UTCTime}
   deriving (Show, Eq)
 
+data PuzzleTimeDisplay =
+  PuzzleTimeDisplay {ptTime :: Maybe Integer,
+                     ptDay :: UTCTime,
+                     ptOffset :: Integer}
+  deriving (Show, Eq)
+
 -- View types
 data PageName = Home | Profile | Friends
               | ReportOffline | ViewLadder
-              | PracticePuzzle
+              | PracticePuzzle | DailyPuzzle
+              | PuzzleLadder
               | Other
               deriving (Show, Eq)
 data NavbarEntry = NavbarEntry {pageName :: PageName,

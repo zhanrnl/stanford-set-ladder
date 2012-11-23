@@ -71,6 +71,7 @@ var sum = function(list) {
     return o;
 };
 
+$.ajaxSetup({ cache: false });
 $(function() {
     var numImagesLoaded = 0;
     var cardContainer = $('#CardContainer');
@@ -78,6 +79,15 @@ $(function() {
     var startTime = new Date();
     var updateTime;
     var errorHideTimeout;
+    var cards = gcards;
+    var mode = gmode;
+
+    // deal with redirecting out when we shouldn't be here
+    $.get('/ajax/hasstarted', function(data) {
+	if (data == 'true') {
+	    window.location.replace("/dailypuzzle");
+	}
+    });
 
     var isSet = function(set) {
 	var cardNums = $.map(set, function(e){return e[1]});
@@ -246,23 +256,45 @@ $(function() {
 			' mistakes where you claimed something was a set that wasn\'t actually, and you made ',
 			$('<strong>').text(self.alreadyFoundMistakes()),
 			' mistakes where you entered a set you had already found.'
-		    ),
-		    $('<a>').text('Play again')
-			.attr({
-			    href: '/play/practicepuzzle'
-			}).addClass('btn btn-success'),
-		    ' ',
-		    $('<a>').text('Go back to main site')
-			.attr({
-			    href: '/practicepuzzle'
-			}).addClass('btn btn-inverse')
+		    )
 		);
-		var rightCol = $('<div>').addClass('span4').append(
-		);
+		if (mode == 'daily') {
+		    leftCol.append(
+			$('<p>').text('Your time has been recorded on the ladder! You might want to head there now and compare your time with your friends\' scores?'),
+			$('<a>').text('View daily puzzle ladder')
+			    .attr({
+				href: '/puzzleladder'
+			    }).addClass('btn btn-success'),
+			' ',
+			$('<a>').text('Go back to main site')
+			    .attr({
+				href: '/'
+			    }).addClass('btn btn-inverse')
+		    );
+		} else {
+		    leftCol.append(
+			$('<a>').text('Play again')
+			    .attr({
+				href: '/play/practicepuzzle'
+			    }).addClass('btn btn-success'),
+			' ',
+			$('<a>').text('Go back to main site')
+			    .attr({
+				href: '/practicepuzzle'
+			    }).addClass('btn btn-inverse')
+		    );
+		}
 		$('#CardContainer').empty().append(
 		    $('<h1>').text('Complete!').addClass('page-header'),
 		    $('<div>').addClass('row').append(leftCol)
 		);
+		if (mode == 'daily') {
+		    $.ajax({
+			type: 'POST',
+			url: '/ajax/puzzlecompleted',
+			data: {'time': viewmodel.time()}
+		    });
+		}
 	    }
 	});
 	self.startGame = function() {
@@ -274,6 +306,12 @@ $(function() {
 	    ko.applyBindings(viewmodel);
 	    viewmodel.showCards(true);
 	    startTime = new Date();
+	    if (mode == 'daily') {
+		$.ajax({
+		    type: 'POST',
+		    url: '/ajax/puzzlestarted'
+		});
+	    }
 	};
     };
 
@@ -324,7 +362,7 @@ $(function() {
 	updateTime = setInterval(function() {
 	    var now = new Date();
 	    viewmodel.time(now - startTime);
-	}, 10);
+	}, 20);
     };
 
     var makeLoadFunction = function(num) {
@@ -349,7 +387,10 @@ $(function() {
 		    }).text('Start!').addClass('btn btn-success'),
 		    ' ',
 		    $('<a>').attr({
-			'href': '/practicepuzzle'
+			'href': (function() {
+			    if (mode == 'practice') return '/practicepuzzle';
+			    else if (mode == 'daily') return '/dailypuzzle';
+			})()
 		    }).text('I don\'t want to do this').addClass('btn btn-inverse')
 		);
 		ko.applyBindings(viewmodel);
@@ -359,7 +400,6 @@ $(function() {
 
     $(document).keydown(function(event) {
 	var keyCode = event.keyCode;
-	//console.log(keyCode);
 	var cardNum;
 	if (keyCode == 32 && viewmodel.readyToStart()) {
 	    viewmodel.startGame();
@@ -372,6 +412,16 @@ $(function() {
 		return;
 	    }
 	    viewmodel.toggleCard(cardNum);
+	}
+    });
+    
+    $(window).unload(function() {
+	if (mode == 'daily' && viewmodel.gameRunning() == true) {
+	    $.ajax({
+		type: 'POST',
+		url: '/ajax/puzzleDNF',
+		async: false
+	    });
 	}
     });
 

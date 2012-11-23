@@ -29,7 +29,7 @@ a {
     color: #cc0f0c;
 }
 
-a:hover {
+a:hover, .pager a:hover {
     color: #d16866;
 }
 

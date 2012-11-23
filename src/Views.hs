@@ -30,10 +30,13 @@ navbarEntries = [
   NavbarEntry Home "Home" "/",
   NavbarEntry Profile "Your profile" "/profile",
   NavbarEntry Friends "Friends" "/friends",
-  NavbarHeader "Play SET!",
-  NavbarEntry PracticePuzzle "Puzzle mode practice" "/practicepuzzle",
-  NavbarEntry ReportOffline "Report offline 1v1 game" "/reportoffline",
-  NavbarEntry ViewLadder "View 1v1 ladder" "/ladder"]
+  NavbarHeader "1v1 Set",
+  NavbarEntry ReportOffline "Report Offline 1v1 game" "/reportoffline",
+  NavbarEntry ViewLadder "1v1 ladder" "/ladder",
+  NavbarHeader "Puzzle mode",
+  NavbarEntry DailyPuzzle "Play the SET Daily Puzzle" "/dailypuzzle",
+  NavbarEntry PracticePuzzle "Puzzle Mode practice" "/practicepuzzle",
+  NavbarEntry PuzzleLadder "Daily Puzzle ladder" "/puzzleladder"]
 
 (!.) :: Attributable h => h -> AttributeValue -> h
 tag !. val = tag ! A.class_ val
@@ -271,6 +274,60 @@ viewLadder username userRatings = pageTemplateNav ViewLadder "Set Ladder: 1v1 La
         highlightName name self = if name == self then "highlight" else ""
         profileLink = ("/profile/" <>)
 
+viewPuzzleLadder :: Text -> [(Text, Maybe Integer)] -> UTCTime -> UTCTime -> Integer -> Html
+viewPuzzleLadder username userTimes offsetDay day curOffset = pageTemplateNav PuzzleLadder "Set Ladder: Daily puzzle Ladder" Nothing username $ [shamlet|
+  <h1 class="page-header">The Set Daily Puzzle Ladder
+  <p>Set Daily Puzzle for #{showGregorian $ utctDay offsetDay}
+  $if null userTimes
+    $if offsetDay == day
+      <p>Nobody has played today's Set daily puzzle yet.
+    $else
+      <p>Nobody played this day's Set daily puzzle.
+  $else 
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Rank
+          <th>Username
+          <th>Time
+      <tbody>
+        $forall timeObj <- userTimesRanks
+          $with name <- fst $ fst timeObj
+            $with timeM <- snd $ fst timeObj
+              $with rank <- snd timeObj
+                <tr class=#{highlightName name username}>
+                  <td>
+                    $if isJust timeM
+                      #{rank}
+                  <td>#{name}
+                  <td>
+                    $case timeM
+                      $of Just time
+                        #{displayTime time}
+                      $of Nothing
+                        <span class="muted">(did not finish puzzle)
+                  <td>
+                    <a href="#{profileLink name}">View profile
+  <ul class="pager">
+    <li class="previous">
+      <a href="/puzzleladder/#{curOffset + 1}">&larr; Older
+    $if not(day == offsetDay)
+      <li class="next">
+        <a href="/puzzleladder/#{curOffset - 1}">Newer &rarr;
+  |]        
+  where userTimesRanks = zip userTimes ([1..] :: [Int])
+        highlightName :: Text -> Text -> Text
+        highlightName name self = if name == self then "highlight" else ""
+        profileLink = ("/profile/" <>)
+
+displayTime :: Integer -> String
+displayTime t = (fillZero . show $ t `P.div` 60000) ++ ":" ++ 
+                (fillZero . show . (`mod` 60) $ t `P.div` 1000) ++ "." ++ 
+                (fillZero . show . (`mod` 100) $ t `P.div` 10)
+  where fillZero str
+          | (length str) < 2 = fillZero $ "0" ++ str
+          | otherwise = str
+                            
 practicePuzzle :: Text -> Html
 practicePuzzle self = pageTemplateNav PracticePuzzle "Set Ladder: Puzzle mode practice" Nothing self $ [shamlet|
   <h1 class="page-header">Puzzle mode practice
@@ -281,20 +338,53 @@ practicePuzzle self = pageTemplateNav PracticePuzzle "Set Ladder: Puzzle mode pr
   <p>To select cards, you can either click on them with your mouse, or use the keyboard. The cards will be mapped to the letters A through L. Click or type a letter again to deselect a card.
   |]
 
+dailyPuzzle :: Text -> Bool -> Html
+dailyPuzzle self seenPuzzle = pageTemplateNav DailyPuzzle "Set Ladder: Daily Puzzle" Nothing self $ [shamlet|
+  <h1 class="page-header">SET Daily Puzzle
+  <p>Compete with other players to solve today's 12-card SET daily puzzle the fastest. New leaderboards and new puzzles every day. 
+  $if seenPuzzle
+    <p>You have already played today's puzzle, and therefore can't play it again. Check back tomorrow for a new puzzle!
+    <a href="/puzzleladder" class="btn btn-inverse">Daily puzzle ladder
+  $else 
+    <p>Click the button below to begin. To be sure your time is recorded, make sure you have a good consistent internet connection before starting the puzzle. Good luck and have fun!
+    <p>
+      <a href="/play/dailypuzzle" class="btn btn-success">Start today's daily puzzle!
+    <p>Want to warm up first?
+    <p>
+      <a href="/practicepuzzle" class="btn btn-inverse">Practice puzzle mode
+  <h3>Rules
+  <p>The 12 cards shown will contain six sets within them, without removing or replacing any cards. Some cards may be used in more than one set. Find all six sets in the fastest time possible!
+  <p>To select cards, you can either click on them with your mouse, or use the keyboard. The cards will be mapped to the letters A through L. Click or type a letter again to deselect a card.
+  |]
+
 playPracticePuzzle :: Text -> Text -> Html
 playPracticePuzzle self cardJSON =
   pageTemplate "Practice SET Puzzle" scripts self $ [shamlet|
   <div class="row">
     <div class="span4" id="LeftPanel">
-      <h1 data-bind="visible: !showCards()">Loading...
+      <h1>Loading...
     <div class="span8" id="CardContainer" data-bind="visible: showCards">
   |]
   where scripts = Just $ do
-          script $ preEscapedText $ "var cards=" <> cardJSON <> ";"
-          script ! A.src "/static/js/playPracticePuzzle.js" $ ""
+          script $ preEscapedText $ "var gcards=" <> cardJSON <> ";" <>
+            "var gmode='practice';"
+          script ! A.src "/static/js/playPuzzle.js" $ ""
 
-userProfile :: Text -> Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> Text -> Html
-userProfile self username realname location rating recentGames message =
+playDailyPuzzle :: Text -> Text -> Html
+playDailyPuzzle self cardJSON =
+  pageTemplate "SET Daily Puzzle" scripts self $ [shamlet|
+  <div class="row">
+    <div class="span4" id="LeftPanel">
+      <h1>Loading...
+    <div class="span8" id="CardContainer" data-bind="visible: showCards">
+  |]
+  where scripts = Just $ do
+          script $ preEscapedText $ "var gcards=" <> cardJSON <> ";" <>
+            "var gmode='daily';"
+          script ! A.src "/static/js/playPuzzle.js" $ ""
+
+userProfile :: Text -> Text -> Text -> Text -> Maybe Rating -> [GameRecordDisplay] -> [PuzzleTimeDisplay] -> Text -> Html
+userProfile self username realname location rating recentGames recentPuzzleTimes message =
   let isSelfProfile = (self == username)
       title = if isSelfProfile
               then "Set Ladder: Your profile"
@@ -402,6 +492,25 @@ userProfile self username realname location rating recentGames message =
                   #{grRating gameRecord}
                 <td>
                   #{formatTime defaultTimeLocale "%-D %-R" (grTime gameRecord)}
+      <h3>Recent Daily Puzzle Times
+      $if null recentGames
+        #{toHtmlNoneGiven ""}
+      $else
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>Day
+              <th>Time to complete
+          <tbody>
+            $forall puzzleTime <- recentPuzzleTimes
+              <tr>
+                <td>#{showGregorian $ utctDay $ ptDay puzzleTime}
+                $if isJust $ ptTime puzzleTime
+                  <td>#{displayTime $ fromJust $ ptTime puzzleTime}
+                $else
+                  <td>Did not finish
+                <td>
+                  <a href="/puzzleladder/#{ptOffset puzzleTime}">View ladder for this day
   |]
   where toResult ownScore opponentScore
           | ownScore > opponentScore = span !. "text-success" $ "Win "

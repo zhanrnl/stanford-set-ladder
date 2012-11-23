@@ -89,3 +89,8 @@ makePuzzle = do
   cards <- randomNCards allCards 12
   if numSetsInCards (map fst cards) == 6 then return cards
     else makePuzzle
+
+reconstitutePuzzle :: [Int] -> [(Card, Int)]
+reconstitutePuzzle nums =
+  let cards = allCards
+  in map (\n -> (cards !! n, n)) nums
